@@ -9,18 +9,39 @@
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
+            background-color: #f4f4f9;
+            color: #333;
         }
         .header {
             text-align: center;
-            padding: 20px;
+            padding: 30px;
+            background-color: #007bff;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        .header p {
+            font-size: 1.1rem;
+        }
+        .header a {
+            color: white;
+            text-decoration: none;
         }
         .section {
             margin-bottom: 40px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
         .section h2 {
-            border-bottom: 2px solid #333;
+            border-bottom: 2px solid #007bff;
             padding-bottom: 5px;
             margin-bottom: 15px;
+            color: #007bff;
         }
         /* Animations */
         .fade-in {
@@ -51,18 +72,51 @@
                 opacity: 1;
             }
         }
+
+        .zoom-in {
+            transform: scale(0.8);
+            opacity: 0;
+            animation: zoomIn 1.5s forwards;
+        }
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .highlight {
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-top: 40px;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+        }
+        footer p {
+            font-size: 1rem;
+        }
     </style>
 </head>
 <body>
-    <header class="header bg-dark text-white fade-in">
+    <header class="header fade-in">
         <h1>Dakshveer K. Torul</h1>
-        <p>+1 647-987-0510 | <a href="mailto:toruldaksh@gmail.com" class="text-white">toruldaksh@gmail.com</a></p>
+        <p>+1 647-987-0510 | <a href="mailto:toruldaksh@gmail.com">toruldaksh@gmail.com</a></p>
     </header>
 
     <main class="container">
         <section class="section slide-up">
             <h2>Profile</h2>
-            <p>Bilingual, holder of an LLQP certificate and a Web Development Certificate, I am currently pursuing a Diploma in Business Finance at Sheridan’s Pilon School of Business.</p>
+            <p>Bilingual, holder of an <span class="highlight">LLQP</span> certificate and a <span class="highlight">Web Development Certificate</span>, I am currently pursuing a <span class="highlight">Diploma in Business Finance</span> at Sheridan’s Pilon School of Business.</p>
         </section>
 
         <section class="section slide-up">
@@ -109,7 +163,7 @@
         </section>
     </main>
 
-    <footer class="text-center mt-5 fade-in">
+    <footer class="fade-in">
         <p>&copy; 2024 Dakshveer K. Torul. All rights reserved.</p>
     </footer>
 </body>
