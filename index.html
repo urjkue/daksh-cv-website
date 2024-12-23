@@ -22,21 +22,50 @@
             padding-bottom: 5px;
             margin-bottom: 15px;
         }
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .slide-up {
+            transform: translateY(50px);
+            opacity: 0;
+            animation: slideUp 1.5s forwards;
+        }
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 <body>
-    <header class="header bg-dark text-white">
+    <header class="header bg-dark text-white fade-in">
         <h1>Dakshveer K. Torul</h1>
         <p>+1 647-987-0510 | <a href="mailto:toruldaksh@gmail.com" class="text-white">toruldaksh@gmail.com</a></p>
     </header>
 
     <main class="container">
-        <section class="section">
+        <section class="section slide-up">
             <h2>Profile</h2>
             <p>Bilingual, holder of an LLQP certificate and a Web Development Certificate, I am currently pursuing a Diploma in Business Finance at Sheridan’s Pilon School of Business.</p>
         </section>
 
-        <section class="section">
+        <section class="section slide-up">
             <h2>Education & Qualifications</h2>
             <ul>
                 <li><strong>Diploma in Business Finance</strong>, Sheridan School of Business (Sep 2024 - Present)</li>
@@ -46,7 +75,7 @@
             </ul>
         </section>
 
-        <section class="section">
+        <section class="section slide-up">
             <h2>Skills</h2>
             <ul>
                 <li>Strong verbal and communication skills - Bilingual (English & French)</li>
@@ -58,7 +87,7 @@
             </ul>
         </section>
 
-        <section class="section">
+        <section class="section slide-up">
             <h2>Projects</h2>
             <ul>
                 <li><strong>Save The Plate:</strong> A platform enabling users to purchase food from nearby locations</li>
@@ -67,7 +96,7 @@
             </ul>
         </section>
 
-        <section class="section">
+        <section class="section slide-up">
             <h2>Professional Experience</h2>
             <p><strong>Salesperson and Clerk</strong>, Wellina Cosy Shop (Jan 2023 - Dec 2023)</p>
             <ul>
@@ -80,7 +109,7 @@
         </section>
     </main>
 
-    <footer class="text-center mt-5">
+    <footer class="text-center mt-5 fade-in">
         <p>&copy; 2024 Dakshveer K. Torul. All rights reserved.</p>
     </footer>
 </body>
