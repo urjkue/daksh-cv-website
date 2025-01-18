@@ -7,24 +7,26 @@
     <style>
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(120deg, #0a1f44, #112a56);
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(120deg, #081c42, #122e58);
             color: #f0f0f0;
+            overflow-x: hidden;
         }
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.9);
             padding: 10px 0;
             text-align: center;
             z-index: 1000;
         }
         nav a {
-            color: #ffcc00;
+            color: #ffd700;
             margin: 0 15px;
             text-decoration: none;
             font-weight: bold;
+            font-size: 1.1rem;
         }
         nav a:hover {
             text-decoration: underline;
@@ -39,13 +41,14 @@
             background: #102a43;
             color: #e0e0e0;
             padding: 20px;
+            animation: fadeIn 2s ease-in;
         }
         header h1 {
-            font-size: 3rem;
-            margin: 0;
+            font-size: 3.5rem;
+            margin-bottom: 10px;
         }
         header p {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
         }
         section {
             display: flex;
@@ -55,6 +58,7 @@
             min-height: 100vh;
             padding: 20px;
             text-align: center;
+            animation: slideIn 1.5s ease-in-out;
         }
         .content {
             max-width: 800px;
@@ -62,38 +66,59 @@
         }
         .section-header {
             margin-bottom: 20px;
+            font-size: 2rem;
+            color: #ffd700;
         }
         .finance-tool {
             background: #1b3555;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
             margin-top: 20px;
             width: 90%;
             max-width: 500px;
         }
         .finance-tool h2 {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
-        .finance-tool input {
-            padding: 10px;
+        .finance-tool input, .finance-tool select {
+            padding: 12px;
             margin: 10px 0;
             border: none;
             border-radius: 5px;
-            width: 80%;
+            width: 100%;
+            box-sizing: border-box;
         }
         .finance-tool button {
-            padding: 10px 20px;
-            background: #ffcc00;
+            padding: 12px 20px;
+            background: #ffd700;
             color: #000;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 1rem;
+        }
+        .finance-tool button:hover {
+            background: #ffcc00;
         }
         footer {
             background: #0a1f44;
             text-align: center;
             padding: 20px;
+            color: #f0f0f0;
+        }
+        footer p {
+            margin: 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
     </style>
 </head>
@@ -105,21 +130,21 @@
 
     <header id="profile">
         <h1>Your Name</h1>
-        <p>A brief summary about yourself goes here.</p>
+        <p>A brief summary about yourself goes here. Highlight your expertise and passions.</p>
         <div class="content">
             <h2 class="section-header">Education</h2>
-            <p>Details about your educational background.</p>
+            <p>Details about your educational background, certifications, and achievements.</p>
 
             <h2 class="section-header">Projects</h2>
-            <p>Descriptions of your key projects.</p>
+            <p>Descriptions of your key projects, including notable outcomes and technologies used.</p>
 
             <h2 class="section-header">Skills</h2>
-            <p>List of your professional skills.</p>
+            <p>List of your professional skills, including technical and soft skills.</p>
         </div>
     </header>
 
     <section id="calculators">
-        <h2>Finance Tools</h2>
+        <h2 class="section-header">Finance Tools</h2>
 
         <div class="finance-tool">
             <h2>Investment Calculator</h2>
