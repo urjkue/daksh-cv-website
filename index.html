@@ -5,197 +5,150 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Finance Portfolio</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
         body {
+            margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #0a0a23;
+            background: linear-gradient(120deg, #0a1f44, #112a56);
             color: #f0f0f0;
-            overflow-x: hidden;
         }
-        section {
-            min-height: 100vh;
+        header {
             display: flex;
-            align-items: center;
             justify-content: center;
-            position: relative;
-        }
-        .hero {
-            background: linear-gradient(to bottom right, #142850, #27496d);
+            align-items: center;
+            height: 100vh;
             text-align: center;
-            padding: 2rem;
-            color: #e8f1f2;
+            background: #102a43;
+            color: #e0e0e0;
+            padding: 20px;
         }
-        .hero h1 {
+        header h1 {
             font-size: 3rem;
-            margin-bottom: 1rem;
-            animation: fadeIn 2s;
+            margin: 0;
         }
-        .hero p {
+        header p {
             font-size: 1.2rem;
-            margin-bottom: 2rem;
         }
-        .hero .cta {
-            padding: 1rem 2rem;
-            font-size: 1rem;
-            color: #0a0a23;
-            background: #00d4ff;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: transform 0.3s;
+        .ticker {
+            width: 100%;
+            overflow: hidden;
+            background: #051836;
+            padding: 10px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
-        .hero .cta:hover {
-            transform: scale(1.1);
-        }
-
-        .about {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 2rem;
-        }
-        .about-card {
-            background: #1e2746;
-            border-radius: 8px;
-            padding: 2rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            animation: slideUp 1.5s;
-        }
-        .about-card h2 {
-            color: #00d4ff;
-            margin-bottom: 1rem;
-        }
-        .about-card p {
-            line-height: 1.6;
-        }
-
-        .finance-tools {
-            background: #142850;
-            padding: 2rem;
-            text-align: center;
-        }
-        .finance-tools h2 {
-            color: #00d4ff;
-            margin-bottom: 2rem;
-        }
-        .calculator {
+        .ticker span {
             display: inline-block;
-            padding: 2rem;
-            background: #1e2746;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            padding: 0 20px;
+            color: #ffcc00;
+            font-weight: bold;
+            animation: scroll 10s linear infinite;
         }
-        .calculator input {
-            width: 100%;
-            padding: 0.5rem;
-            margin-bottom: 1rem;
-            border-radius: 4px;
-            border: 1px solid #27496d;
+        @keyframes scroll {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
         }
-        .calculator button {
-            width: 100%;
-            padding: 0.5rem;
-            border: none;
-            background: #00d4ff;
-            color: #0a0a23;
-            font-size: 1rem;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        .calculator button:hover {
-            background: #00a8cc;
-        }
-        .calculator .result {
-            margin-top: 1rem;
-            font-size: 1.2rem;
-            color: #00d4ff;
-        }
-
-        footer {
-            background: #0a0a23;
+        .section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
             text-align: center;
-            padding: 2rem;
         }
-        footer p {
-            font-size: 1rem;
-            color: #7d8da1;
+        .finance-tool {
+            background: #1b3555;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .finance-tool h2 {
+            margin: 0 0 10px;
         }
-
-        @keyframes slideUp {
-            from {
-                transform: translateY(30px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+        .finance-tool input {
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            width: 80%;
+        }
+        .finance-tool button {
+            padding: 10px 20px;
+            background: #ffcc00;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        footer {
+            background: #0a1f44;
+            text-align: center;
+            padding: 20px;
         }
     </style>
 </head>
 <body>
-    <section class="hero">
+    <header>
         <div>
-            <h1>Welcome to Finance Hub</h1>
-            <p>Your gateway to smarter financial decisions.</p>
-            <button class="cta">Get Started</button>
+            <h1>Welcome to My Finance Hub</h1>
+            <p>Stay on top of the market with live updates and tools.</p>
+        </div>
+    </header>
+
+    <div class="ticker">
+        <span>BTC: $43,212.10</span>
+        <span>ETH: $3,521.45</span>
+        <span>SOL: $142.78</span>
+        <span>ADA: $2.31</span>
+    </div>
+
+    <section class="section">
+        <div class="finance-tool">
+            <h2>Price Converter</h2>
+            <input type="number" id="crypto-amount" placeholder="Enter crypto amount">
+            <button onclick="convertPrice()">Convert</button>
+            <p id="conversion-result"></p>
         </div>
     </section>
 
-    <section class="about">
-        <div class="about-card">
-            <h2>Our Vision</h2>
-            <p>We aim to empower individuals to achieve financial independence by providing cutting-edge tools and insights.</p>
-        </div>
-        <div class="about-card">
-            <h2>Our Mission</h2>
-            <p>To simplify finance and make it accessible to everyone, regardless of their expertise level.</p>
-        </div>
-        <div class="about-card">
-            <h2>Why Choose Us?</h2>
-            <p>We blend technology, finance, and a touch of innovation to create unparalleled financial solutions.</p>
-        </div>
-    </section>
-
-    <section class="finance-tools">
-        <h2>Finance Calculator</h2>
-        <div class="calculator">
-            <h3>Simple Interest Calculator</h3>
-            <input type="number" id="principal" placeholder="Principal (e.g., $1000)">
-            <input type="number" id="rate" placeholder="Annual Interest Rate (%)">
-            <input type="number" id="time" placeholder="Time (in years)">
-            <button onclick="calculateInterest()">Calculate</button>
-            <div class="result" id="result"></div>
+    <section class="section">
+        <div class="finance-tool">
+            <h2>Investment Calculator</h2>
+            <input type="number" id="investment" placeholder="Investment Amount ($)">
+            <input type="number" id="growth" placeholder="Growth Rate (%)">
+            <button onclick="calculateROI()">Calculate ROI</button>
+            <p id="roi-result"></p>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2025 Finance Hub. All rights reserved.</p>
+        <p>&copy; 2025 Finance Portfolio. All rights reserved.</p>
     </footer>
 
     <script>
-        function calculateInterest() {
-            const principal = parseFloat(document.getElementById('principal').value);
-            const rate = parseFloat(document.getElementById('rate').value);
-            const time = parseFloat(document.getElementById('time').value);
-
-            if (isNaN(principal) || isNaN(rate) || isNaN(time)) {
-                document.getElementById('result').innerText = "Please enter valid numbers.";
+        function convertPrice() {
+            const amount = parseFloat(document.getElementById('crypto-amount').value);
+            const conversionRate = 43212.10; // Example BTC rate
+            if (isNaN(amount) || amount <= 0) {
+                document.getElementById('conversion-result').textContent = 'Enter a valid amount.';
                 return;
             }
+            const result = amount * conversionRate;
+            document.getElementById('conversion-result').textContent = `Converted Value: $${result.toFixed(2)}`;
+        }
 
-            const interest = (principal * rate * time) / 100;
-            document.getElementById('result').innerText = `Simple Interest: $${interest.toFixed(2)}`;
+        function calculateROI() {
+            const investment = parseFloat(document.getElementById('investment').value);
+            const growthRate = parseFloat(document.getElementById('growth').value);
+            if (isNaN(investment) || investment <= 0 || isNaN(growthRate) || growthRate <= 0) {
+                document.getElementById('roi-result').textContent = 'Enter valid investment and growth rate.';
+                return;
+            }
+            const roi = investment * (1 + growthRate / 100);
+            document.getElementById('roi-result').textContent = `Projected ROI: $${roi.toFixed(2)}`;
         }
     </script>
 </body>
