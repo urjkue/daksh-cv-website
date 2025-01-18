@@ -8,31 +8,30 @@
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            line-height: 1.8;
-            background-color: #121212;
+            background-color: #0D47A1; /* Dark Blue Background */
             color: #E0E0E0;
             margin: 0;
             padding: 0;
         }
 
         .header {
-            background-color: #0D47A1;
-            padding: 60px 0;
-            text-align: center;
+            background-color: #1A237E; /* Dark Navy Blue */
             color: white;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 80px 0;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
             animation: fadeIn 1s ease-in;
         }
 
         .header h1 {
             font-size: 3rem;
             font-weight: 700;
+            letter-spacing: 2px;
             margin-bottom: 10px;
-            letter-spacing: 1px;
         }
 
         .header p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 400;
         }
 
@@ -42,16 +41,18 @@
         }
 
         .container {
-            padding: 50px 15px;
+            padding: 60px 20px;
         }
 
         .section {
-            background-color: #1E1E1E;
+            background-color: #263238; /* Dark Gray Background */
             border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 40px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out;
+            opacity: 0;
+            animation: slideInLeft 1s forwards;
         }
 
         .section:hover {
@@ -59,7 +60,7 @@
         }
 
         .section h2 {
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             font-weight: 600;
             color: #FFEB3B;
             border-bottom: 3px solid #FFEB3B;
@@ -97,9 +98,20 @@
             }
         }
 
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
         @keyframes fadeUp {
             from {
-                transform: translateY(20px);
+                transform: translateY(30px);
                 opacity: 0;
             }
             to {
@@ -109,11 +121,12 @@
         }
 
         footer {
-            background-color: #0D47A1;
+            background-color: #1A237E; /* Dark Navy Blue */
             color: white;
             padding: 20px;
             text-align: center;
-            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+            box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.2);
         }
 
         footer p {
@@ -121,6 +134,11 @@
             margin: 0;
         }
 
+        /* Add a hover effect for links */
+        a:hover {
+            text-decoration: underline;
+            color: #FFEB3B;
+        }
     </style>
 </head>
 <body>
