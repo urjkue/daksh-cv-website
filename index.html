@@ -3,213 +3,174 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Finance Portfolio</title>
+    <title>Dakshveer K. Torul - CV</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            margin: 0;
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(120deg, #081c42, #122e58);
-            color: #f0f0f0;
-            overflow-x: hidden;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f9;
+            color: #333;
         }
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            padding: 10px 0;
+        .header {
             text-align: center;
-            z-index: 1000;
+            padding: 30px;
+            background-color: #007bff;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
-        nav a {
-            color: #ffd700;
-            margin: 0 15px;
-            text-decoration: none;
+        .header h1 {
+            font-size: 2.5rem;
             font-weight: bold;
+        }
+        .header p {
             font-size: 1.1rem;
         }
-        nav a:hover {
-            text-decoration: underline;
+        .header a {
+            color: white;
+            text-decoration: none;
         }
-        header {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-            background: #102a43;
-            color: #e0e0e0;
+        .section {
+            margin-bottom: 40px;
             padding: 20px;
-            animation: fadeIn 2s ease-in;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
-        header h1 {
-            font-size: 3.5rem;
-            margin-bottom: 10px;
-        }
-        header p {
-            font-size: 1.3rem;
-        }
-        section {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-            text-align: center;
-            animation: slideIn 1.5s ease-in-out;
-        }
-        .content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .section-header {
-            margin-bottom: 20px;
-            font-size: 2rem;
-            color: #ffd700;
-        }
-        .finance-tool {
-            background: #1b3555;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-            margin-top: 20px;
-            width: 90%;
-            max-width: 500px;
-        }
-        .finance-tool h2 {
+        .section h2 {
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
             margin-bottom: 15px;
+            color: #007bff;
         }
-        .finance-tool input, .finance-tool select {
-            padding: 12px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 5px;
-            width: 100%;
-            box-sizing: border-box;
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 2s forwards;
         }
-        .finance-tool button {
-            padding: 12px 20px;
-            background: #ffd700;
-            color: #000;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
-        .finance-tool button:hover {
-            background: #ffcc00;
+
+        .slide-up {
+            transform: translateY(50px);
+            opacity: 0;
+            animation: slideUp 1.5s forwards;
         }
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .zoom-in {
+            transform: scale(0.8);
+            opacity: 0;
+            animation: zoomIn 1.5s forwards;
+        }
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .highlight {
+            color: #007bff;
+            font-weight: bold;
+        }
+
         footer {
-            background: #0a1f44;
-            text-align: center;
+            background-color: #333;
+            color: white;
             padding: 20px;
-            color: #f0f0f0;
+            text-align: center;
+            margin-top: 40px;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
         }
         footer p {
-            margin: 0;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideIn {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            font-size: 1rem;
         }
     </style>
 </head>
 <body>
-    <nav>
-        <a href="#profile">Profile</a>
-        <a href="#calculators">Finance Tools</a>
-    </nav>
-
-    <header id="profile">
-        <h1>Your Name</h1>
-        <p>A brief summary about yourself goes here. Highlight your expertise and passions.</p>
-        <div class="content">
-            <h2 class="section-header">Education</h2>
-            <p>Details about your educational background, certifications, and achievements.</p>
-
-            <h2 class="section-header">Projects</h2>
-            <p>Descriptions of your key projects, including notable outcomes and technologies used.</p>
-
-            <h2 class="section-header">Skills</h2>
-            <p>List of your professional skills, including technical and soft skills.</p>
-        </div>
+    <header class="header fade-in">
+        <h1>Dakshveer K. Torul</h1>
+        <p>+1 647-987-0510 | <a href="mailto:toruldaksh@gmail.com">toruldaksh@gmail.com</a></p>
     </header>
 
-    <section id="calculators">
-        <h2 class="section-header">Finance Tools</h2>
+    <main class="container">
+        <section class="section slide-up">
+            <h2>Profile</h2>
+            <p>Bilingual, holder of an <span class="highlight">LLQP</span> certificate and a <span class="highlight">Web Development Certificate</span>, I am currently pursuing a <span class="highlight">Diploma in Business Finance</span> at Sheridan’s Pilon School of Business.</p>
+        </section>
 
-        <div class="finance-tool">
-            <h2>Investment Calculator</h2>
-            <input type="number" id="investment" placeholder="Investment Amount ($)">
-            <input type="number" id="growth" placeholder="Growth Rate (%)">
-            <input type="number" id="periods" placeholder="Number of Months">
-            <select id="compounding">
-                <option value="monthly">Monthly</option>
-                <option value="annually">Annually</option>
-            </select>
-            <button onclick="calculateROI()">Calculate ROI</button>
-            <p id="roi-result"></p>
-        </div>
+        <section class="section slide-up">
+            <h2>Education & Qualifications</h2>
+            <ul>
+                <li><strong>Diploma in Business Finance</strong>, Sheridan School of Business (Sep 2024 - Present)</li>
+                <li><strong>LLQP Certificate</strong> (Oct 2024)</li>
+                <li><strong>Full Stack Web Development Bootcamp</strong>, Le Wagon (Aug 2023 - Dec 2023)</li>
+                <li><strong>High School Graduate</strong>, A Level Cambridge International Exams (Nov 2022)</li>
+            </ul>
+        </section>
 
-        <div class="finance-tool">
-            <h2>Loan Payment Calculator</h2>
-            <input type="number" id="loan-amount" placeholder="Loan Amount">
-            <input type="number" id="annual-rate" placeholder="Annual Rate (%)">
-            <input type="number" id="loan-years" placeholder="Loan Term (Years)">
-            <button onclick="calculatePMT()">Calculate Payment</button>
-            <p id="pmt-result"></p>
-        </div>
-    </section>
+        <section class="section slide-up">
+            <h2>Skills</h2>
+            <ul>
+                <li>Strong verbal and communication skills - Bilingual (English & French)</li>
+                <li>Highly tech-savvy: Rails, Ruby, HTML, CSS, JS, C#, API, Bootstrap, Figma</li>
+                <li>Proficient in Microsoft Office tools: Excel, Word, PowerPoint</li>
+                <li>Good knowledge of Mutual Funds, Segregated Funds, and Life Insurance</li>
+                <li>Collaboration and teamwork</li>
+                <li>Leadership</li>
+            </ul>
+        </section>
 
-    <footer>
-        <p>&copy; 2025 Your Portfolio. All rights reserved.</p>
+        <section class="section slide-up">
+            <h2>Projects</h2>
+            <ul>
+                <li><strong>Save The Plate:</strong> A platform enabling users to purchase food from nearby locations</li>
+                <li><strong>Melody Market:</strong> An online platform facilitating the rent of musical instruments</li>
+                <li><strong>GMTK Jam Game Development:</strong> Created a game within 48 hours for a game development competition</li>
+            </ul>
+        </section>
+
+        <section class="section slide-up">
+            <h2>Professional Experience</h2>
+            <p><strong>Salesperson and Clerk</strong>, Wellina Cosy Shop (Jan 2023 - Dec 2023)</p>
+            <ul>
+                <li>Attending to customers’ requests</li>
+                <li>Taking and fulfilling online orders</li>
+                <li>Daily reconciliation of takings with sales invoices, balancing cash float, and ensuring prompt banking</li>
+                <li>Recording daily transactions</li>
+                <li>Maintaining stock in an orderly manner and performing regular inventory counts</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="fade-in">
+        <p>&copy; 2024 Dakshveer K. Torul. All rights reserved.</p>
     </footer>
-
-    <script>
-        function calculateROI() {
-            const investment = parseFloat(document.getElementById('investment').value);
-            const growthRate = parseFloat(document.getElementById('growth').value) / 100;
-            const periods = parseFloat(document.getElementById('periods').value);
-            const compounding = document.getElementById('compounding').value;
-
-            if (isNaN(investment) || investment <= 0 || isNaN(growthRate) || growthRate <= 0 || isNaN(periods) || periods <= 0) {
-                document.getElementById('roi-result').textContent = 'Enter valid inputs.';
-                return;
-            }
-
-            let roi;
-            if (compounding === 'monthly') {
-                roi = investment * Math.pow(1 + growthRate / 12, periods);
-            } else {
-                roi = investment * Math.pow(1 + growthRate, periods / 12);
-            }
-
-            document.getElementById('roi-result').textContent = `Projected ROI: $${roi.toFixed(2)}`;
-        }
-
-        function calculatePMT() {
-            const loan = parseFloat(document.getElementById('loan-amount').value);
-            const annualRate = parseFloat(document.getElementById('annual-rate').value) / 100;
-            const years = parseFloat(document.getElementById('loan-years').value);
-
-            if (isNaN(loan) || loan <= 0 || isNaN(annualRate) || annualRate <= 0 || isNaN(years) || years <= 0) {
-                document.getElementById('pmt-result').textContent = 'Enter valid inputs.';
-                return;
-            }
-
-            const monthlyRate = annualRate / 12;
-            const n = years * 12;
-            const pmt = (loan * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -n));
-            document.getElementById('pmt-result').textContent = `Monthly Payment: $${pmt.toFixed(2)}`;
-        }
-    </script>
 </body>
 </html>
+
+can you amke it wayyyyyyyyyyyyyyyyyyyy
+nicer
+like way ncierr
+dark blue bg , animations  ,
+idk anything awsome you can thing of to style it proffesional  minimalist , awsome uk 
