@@ -1,289 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dakshveer K. Torul - CV</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Finance Portfolio</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-            transition: all 0.3s ease;
         }
-
         body {
-            background-color: #1C1C1C;
-            color: #E0E0E0;
-            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #0a0a23;
+            color: #f0f0f0;
             overflow-x: hidden;
-            font-size: 1rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
         }
-
-        /* Global Styles */
-        h1, h2 {
-            font-weight: 600;
-            color: #FFF;
-        }
-
-        p, li {
-            color: #B0BEC5;
-        }
-
-        /* HEADER */
-        header {
-            width: 100%;
-            padding: 100px 40px 50px 40px;
-            text-align: center;
-            background-color: #0D47A1;
-            border-bottom: 4px solid #FF9800;
-            transform: translateY(-100px);
-            opacity: 0;
-            animation: fadeIn 1.5s forwards;
-            z-index: 1;
-        }
-
-        header h1 {
-            font-size: 3.5rem;
-            margin-bottom: 10px;
-            color: #FF9800;
-        }
-
-        header p {
-            font-size: 1.2rem;
-        }
-
-        header a {
-            color: #FF9800;
-            text-decoration: none;
-        }
-
-        header a:hover {
-            text-decoration: underline;
-        }
-
-        /* SECTIONS */
         section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .hero {
+            background: linear-gradient(to bottom right, #142850, #27496d);
+            text-align: center;
+            padding: 2rem;
+            color: #e8f1f2;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeIn 2s;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        .hero .cta {
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            color: #0a0a23;
+            background: #00d4ff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .hero .cta:hover {
+            transform: scale(1.1);
+        }
+
+        .about {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+        .about-card {
+            background: #1e2746;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            animation: slideUp 1.5s;
+        }
+        .about-card h2 {
+            color: #00d4ff;
+            margin-bottom: 1rem;
+        }
+        .about-card p {
+            line-height: 1.6;
+        }
+
+        .finance-tools {
+            background: #142850;
+            padding: 2rem;
+            text-align: center;
+        }
+        .finance-tools h2 {
+            color: #00d4ff;
+            margin-bottom: 2rem;
+        }
+        .calculator {
+            display: inline-block;
+            padding: 2rem;
+            background: #1e2746;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .calculator input {
             width: 100%;
-            max-width: 1100px;
-            padding: 60px 20px;
-            text-align: center;
-            opacity: 0;
-            animation: fadeIn 1.5s forwards;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+            border: 1px solid #27496d;
+        }
+        .calculator button {
+            width: 100%;
+            padding: 0.5rem;
+            border: none;
+            background: #00d4ff;
+            color: #0a0a23;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .calculator button:hover {
+            background: #00a8cc;
+        }
+        .calculator .result {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            color: #00d4ff;
         }
 
-        section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: #FF9800;
-        }
-
-        /* Path Line Effect */
-        .path-line {
-            width: 3px;
-            background-color: #FF9800;
-            position: absolute;
-            left: 50%;
-            top: 0;
-            height: 100%;
-            z-index: 0;
-            transform: translateX(-50%);
-        }
-
-        /* Left Aligned Section */
-        .left {
-            position: relative;
-            animation: slideLeft 1s forwards;
-            margin-bottom: 40px;
-        }
-
-        .left p, .left ul {
-            text-align: left;
-        }
-
-        /* Right Aligned Section */
-        .right {
-            position: relative;
-            animation: slideRight 1s forwards;
-            margin-bottom: 40px;
-        }
-
-        .right p, .right ul {
-            text-align: right;
-        }
-
-        /* Center Aligned Section */
-        .center {
-            position: relative;
-            animation: slideUp 1s forwards;
-            margin-bottom: 40px;
-        }
-
-        .center p {
-            text-align: center;
-        }
-
-        /* Unique floating circle for visual interest */
-        .floating-circle {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            background-color: #FF9800;
-            opacity: 0.3;
-            transform: translate(-50%, -50%);
-            animation: floatCircle 4s ease-in-out infinite;
-        }
-
-        /* Footer */
         footer {
-            background-color: #0D47A1;
-            width: 100%;
-            padding: 30px;
-            color: white;
+            background: #0a0a23;
             text-align: center;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            z-index: 1;
+            padding: 2rem;
         }
-
         footer p {
             font-size: 1rem;
+            color: #7d8da1;
         }
 
-        /* ANIMATIONS */
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideLeft {
-            from {
-                transform: translateX(-100%);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideRight {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         @keyframes slideUp {
             from {
-                transform: translateY(50px);
+                transform: translateY(30px);
                 opacity: 0;
             }
-
             to {
                 transform: translateY(0);
                 opacity: 1;
             }
         }
-
-        @keyframes floatCircle {
-            0% {
-                transform: translate(-50%, -50%) scale(1);
-            }
-
-            50% {
-                transform: translate(-50%, -50%) scale(1.2);
-            }
-
-            100% {
-                transform: translate(-50%, -50%) scale(1);
-            }
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2.5rem;
-            }
-
-            .left, .right, .center {
-                padding: 20px;
-            }
-
-            .left ul, .right ul {
-                text-align: center;
-            }
-        }
     </style>
 </head>
-
 <body>
-
-    <!-- Header -->
-    <header>
-        <h1>Dakshveer K. Torul</h1>
-        <p>+1 647-987-0510 | <a href="mailto:toruldaksh@gmail.com">toruldaksh@gmail.com</a></p>
-    </header>
-
-    <!-- Path Line -->
-    <div class="path-line"></div>
-
-    <!-- Left Section -->
-    <section class="left">
-        <h2>Profile</h2>
-        <p>Bilingual, holder of an <span class="highlight">LLQP</span> certificate and a <span class="highlight">Web Development Certificate</span>, currently pursuing a <span class="highlight">Diploma in Business Finance</span> at Sheridan’s Pilon School of Business.</p>
+    <section class="hero">
+        <div>
+            <h1>Welcome to Finance Hub</h1>
+            <p>Your gateway to smarter financial decisions.</p>
+            <button class="cta">Get Started</button>
+        </div>
     </section>
 
-    <!-- Right Section -->
-    <section class="right">
-        <h2>Education</h2>
-        <ul>
-            <li><strong>Diploma in Business Finance</strong>, Sheridan School of Business (Sep 2024 - Present)</li>
-            <li><strong>LLQP Certificate</strong> (Oct 2024)</li>
-            <li><strong>Full Stack Web Development Bootcamp</strong>, Le Wagon (Aug 2023 - Dec 2023)</li>
-            <li><strong>High School Graduate</strong>, A Level Cambridge International Exams (Nov 2022)</li>
-        </ul>
+    <section class="about">
+        <div class="about-card">
+            <h2>Our Vision</h2>
+            <p>We aim to empower individuals to achieve financial independence by providing cutting-edge tools and insights.</p>
+        </div>
+        <div class="about-card">
+            <h2>Our Mission</h2>
+            <p>To simplify finance and make it accessible to everyone, regardless of their expertise level.</p>
+        </div>
+        <div class="about-card">
+            <h2>Why Choose Us?</h2>
+            <p>We blend technology, finance, and a touch of innovation to create unparalleled financial solutions.</p>
+        </div>
     </section>
 
-    <!-- Center Section -->
-    <section class="center">
-        <h2>Skills & Projects</h2>
-        <p><strong>Skills:</strong> Strong verbal & communication skills (Bilingual), Web Development (Rails, Ruby, HTML, CSS, JS, Bootstrap, etc.), Microsoft Office tools proficiency, Teamwork & Leadership.</p>
-        <p><strong>Projects:</strong> Save The Plate, Melody Market, GMTK Jam Game Development (Game in 48hrs).</p>
+    <section class="finance-tools">
+        <h2>Finance Calculator</h2>
+        <div class="calculator">
+            <h3>Simple Interest Calculator</h3>
+            <input type="number" id="principal" placeholder="Principal (e.g., $1000)">
+            <input type="number" id="rate" placeholder="Annual Interest Rate (%)">
+            <input type="number" id="time" placeholder="Time (in years)">
+            <button onclick="calculateInterest()">Calculate</button>
+            <div class="result" id="result"></div>
+        </div>
     </section>
 
-    <!-- Footer -->
     <footer>
-        <p>&copy; 2024 Dakshveer K. Torul. All rights reserved.</p>
+        <p>&copy; 2025 Finance Hub. All rights reserved.</p>
     </footer>
 
-    <!-- Floating Circle for Aesthetic -->
-    <div class="floating-circle"></div>
+    <script>
+        function calculateInterest() {
+            const principal = parseFloat(document.getElementById('principal').value);
+            const rate = parseFloat(document.getElementById('rate').value);
+            const time = parseFloat(document.getElementById('time').value);
 
+            if (isNaN(principal) || isNaN(rate) || isNaN(time)) {
+                document.getElementById('result').innerText = "Please enter valid numbers.";
+                return;
+            }
+
+            const interest = (principal * rate * time) / 100;
+            document.getElementById('result').innerText = `Simple Interest: $${interest.toFixed(2)}`;
+        }
+    </script>
 </body>
-
 </html>
