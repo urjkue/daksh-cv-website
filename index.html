@@ -3,39 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Finance Portfolio</title>
+    <title>Personal Finance Portfolio</title>
     <style>
         body {
             margin: 0;
             font-family: Arial, sans-serif;
             background: linear-gradient(120deg, #0a1f44, #112a56);
             color: #f0f0f0;
-        }
-        section {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            padding: 20px;
-            text-align: center;
-        }
-        header {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-            background: #102a43;
-            color: #e0e0e0;
-            padding: 20px;
-        }
-        header h1 {
-            font-size: 3rem;
-            margin: 0;
-        }
-        header p {
-            font-size: 1.2rem;
         }
         nav {
             position: fixed;
@@ -55,15 +29,51 @@
         nav a:hover {
             text-decoration: underline;
         }
+        header {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            background: #102a43;
+            color: #e0e0e0;
+            padding: 20px;
+        }
+        header h1 {
+            font-size: 3rem;
+            margin: 0;
+        }
+        header p {
+            font-size: 1.2rem;
+        }
+        section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            text-align: center;
+        }
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .section-header {
+            margin-bottom: 20px;
+        }
         .finance-tool {
             background: #1b3555;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             margin-top: 20px;
+            width: 90%;
+            max-width: 500px;
         }
         .finance-tool h2 {
-            margin: 0 0 10px;
+            margin-bottom: 10px;
         }
         .finance-tool input {
             padding: 10px;
@@ -89,53 +99,39 @@
 </head>
 <body>
     <nav>
-        <a href="#about">About Me</a>
-        <a href="#ticker">Live Ticker</a>
+        <a href="#profile">Profile</a>
         <a href="#calculators">Finance Tools</a>
     </nav>
 
-    <header id="about">
-        <div>
-            <h1>Welcome to My Finance Hub</h1>
-            <p>Stay on top of the market with live updates and tools.</p>
+    <header id="profile">
+        <h1>Your Name</h1>
+        <p>A brief summary about yourself goes here.</p>
+        <div class="content">
+            <h2 class="section-header">Education</h2>
+            <p>Details about your educational background.</p>
+
+            <h2 class="section-header">Projects</h2>
+            <p>Descriptions of your key projects.</p>
+
+            <h2 class="section-header">Skills</h2>
+            <p>List of your professional skills.</p>
         </div>
     </header>
 
-    <section id="ticker">
-        <div>
-            <h2>Live Crypto Ticker</h2>
-            <div class="ticker">
-                <span>BTC: $43,212.10</span>
-                <span>ETH: $3,521.45</span>
-                <span>SOL: $142.78</span>
-                <span>ADA: $2.31</span>
-            </div>
-        </div>
-    </section>
-
     <section id="calculators">
-        <div class="finance-tool">
-            <h2>Price Converter</h2>
-            <input type="number" id="crypto-amount" placeholder="Enter crypto amount">
-            <button onclick="convertPrice()">Convert</button>
-            <p id="conversion-result"></p>
-        </div>
+        <h2>Finance Tools</h2>
 
         <div class="finance-tool">
             <h2>Investment Calculator</h2>
             <input type="number" id="investment" placeholder="Investment Amount ($)">
             <input type="number" id="growth" placeholder="Growth Rate (%)">
+            <input type="number" id="periods" placeholder="Number of Months">
+            <select id="compounding">
+                <option value="monthly">Monthly</option>
+                <option value="annually">Annually</option>
+            </select>
             <button onclick="calculateROI()">Calculate ROI</button>
             <p id="roi-result"></p>
-        </div>
-
-        <div class="finance-tool">
-            <h2>Present Value Calculator</h2>
-            <input type="number" id="future-value" placeholder="Future Value">
-            <input type="number" id="rate" placeholder="Rate (%)">
-            <input type="number" id="time" placeholder="Time (Years)">
-            <button onclick="calculatePV()">Calculate PV</button>
-            <p id="pv-result"></p>
         </div>
 
         <div class="finance-tool">
@@ -149,52 +145,41 @@
     </section>
 
     <footer>
-        <p>&copy; 2025 Finance Portfolio. All rights reserved.</p>
+        <p>&copy; 2025 Your Portfolio. All rights reserved.</p>
     </footer>
 
     <script>
-        function convertPrice() {
-            const amount = parseFloat(document.getElementById('crypto-amount').value);
-            const conversionRate = 43212.10; // Example BTC rate
-            if (isNaN(amount) || amount <= 0) {
-                document.getElementById('conversion-result').textContent = 'Enter a valid amount.';
-                return;
-            }
-            const result = amount * conversionRate;
-            document.getElementById('conversion-result').textContent = `Converted Value: $${result.toFixed(2)}`;
-        }
-
         function calculateROI() {
             const investment = parseFloat(document.getElementById('investment').value);
-            const growthRate = parseFloat(document.getElementById('growth').value);
-            if (isNaN(investment) || investment <= 0 || isNaN(growthRate) || growthRate <= 0) {
-                document.getElementById('roi-result').textContent = 'Enter valid investment and growth rate.';
-                return;
-            }
-            const roi = investment * (1 + growthRate / 100);
-            document.getElementById('roi-result').textContent = `Projected ROI: $${roi.toFixed(2)}`;
-        }
+            const growthRate = parseFloat(document.getElementById('growth').value) / 100;
+            const periods = parseFloat(document.getElementById('periods').value);
+            const compounding = document.getElementById('compounding').value;
 
-        function calculatePV() {
-            const fv = parseFloat(document.getElementById('future-value').value);
-            const rate = parseFloat(document.getElementById('rate').value) / 100;
-            const time = parseFloat(document.getElementById('time').value);
-            if (isNaN(fv) || fv <= 0 || isNaN(rate) || rate <= 0 || isNaN(time) || time <= 0) {
-                document.getElementById('pv-result').textContent = 'Enter valid inputs.';
+            if (isNaN(investment) || investment <= 0 || isNaN(growthRate) || growthRate <= 0 || isNaN(periods) || periods <= 0) {
+                document.getElementById('roi-result').textContent = 'Enter valid inputs.';
                 return;
             }
-            const pv = fv / Math.pow(1 + rate, time);
-            document.getElementById('pv-result').textContent = `Present Value: $${pv.toFixed(2)}`;
+
+            let roi;
+            if (compounding === 'monthly') {
+                roi = investment * Math.pow(1 + growthRate / 12, periods);
+            } else {
+                roi = investment * Math.pow(1 + growthRate, periods / 12);
+            }
+
+            document.getElementById('roi-result').textContent = `Projected ROI: $${roi.toFixed(2)}`;
         }
 
         function calculatePMT() {
             const loan = parseFloat(document.getElementById('loan-amount').value);
             const annualRate = parseFloat(document.getElementById('annual-rate').value) / 100;
             const years = parseFloat(document.getElementById('loan-years').value);
+
             if (isNaN(loan) || loan <= 0 || isNaN(annualRate) || annualRate <= 0 || isNaN(years) || years <= 0) {
                 document.getElementById('pmt-result').textContent = 'Enter valid inputs.';
                 return;
             }
+
             const monthlyRate = annualRate / 12;
             const n = years * 12;
             const pmt = (loan * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -n));
