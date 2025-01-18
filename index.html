@@ -11,30 +11,34 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            transition: all 0.3s ease;
         }
 
         body {
             font-family: 'Roboto', sans-serif;
             background-color: #0D47A1;
             color: #E0E0E0;
-            line-height: 1.6;
+            overflow-x: hidden;
+            height: 100vh;
         }
 
         /* HEADER */
         header {
             background-color: #1A237E;
-            text-align: center;
-            padding: 60px 0;
+            padding: 80px 30px;
             position: relative;
             z-index: 1;
+            text-align: center;
+            transform: translateY(100px);
+            opacity: 0;
+            animation: headerAnimation 1.5s forwards;
         }
 
         header h1 {
-            font-size: 3rem;
-            font-weight: 700;
+            font-size: 4rem;
             color: #FFEB3B;
             margin-bottom: 10px;
-            animation: slideIn 1.2s ease-out;
+            font-weight: 700;
         }
 
         header p {
@@ -45,49 +49,39 @@
         header a {
             color: #FFEB3B;
             text-decoration: none;
-            transition: 0.3s ease;
         }
 
         header a:hover {
             text-decoration: underline;
         }
 
-        /* SECTIONS */
-        section {
-            padding: 80px 20px;
-            margin-top: 40px;
-            position: relative;
+        /* LEFT SECTION */
+        .left {
+            position: absolute;
+            top: 180px;
+            left: 0;
+            padding: 20px;
+            width: 40%;
+            transform: translateX(-100%);
+            animation: slideLeft 1.5s forwards;
         }
 
-        section h2 {
+        .left h2 {
             font-size: 2.5rem;
-            font-weight: 600;
             color: #FFEB3B;
-            margin-bottom: 30px;
-            animation: fadeInUp 1s ease-in-out;
+            margin-bottom: 20px;
+            font-weight: 700;
         }
 
-        section p {
+        .left p,
+        .left ul {
             font-size: 1.1rem;
-            color: #CFD8DC;
             line-height: 1.8;
-            margin-bottom: 30px;
-        }
-
-        section ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        section ul li {
-            font-size: 1.1rem;
-            margin-bottom: 10px;
             color: #CFD8DC;
-            transition: color 0.3s ease;
         }
 
-        section ul li:hover {
-            color: #FFEB3B;
+        .left ul li {
+            margin-bottom: 10px;
         }
 
         .highlight {
@@ -95,28 +89,49 @@
             font-weight: bold;
         }
 
-        .divider {
-            height: 2px;
-            background-color: #FFEB3B;
-            width: 100px;
-            margin: 20px 0;
-            animation: fadeInUp 1s ease-in-out;
+        /* RIGHT SECTION */
+        .right {
+            position: absolute;
+            top: 180px;
+            right: 0;
+            padding: 20px;
+            width: 40%;
+            transform: translateX(100%);
+            animation: slideRight 1.5s forwards;
         }
 
-        /* INTERACTIVE BUTTON */
-        .btn {
+        .right h2 {
+            font-size: 2.5rem;
+            color: #FFEB3B;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .right p,
+        .right ul {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #CFD8DC;
+        }
+
+        .right ul li {
+            margin-bottom: 10px;
+        }
+
+        .right .btn {
             display: inline-block;
+            padding: 15px 30px;
             background-color: #FFEB3B;
             color: #1A237E;
-            padding: 15px 30px;
-            font-size: 1rem;
-            font-weight: 600;
             text-decoration: none;
-            border-radius: 25px;
-            transition: transform 0.3s ease, background-color 0.3s ease;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 30px;
+            margin-top: 20px;
+            transition: transform 0.3s, background-color 0.3s;
         }
 
-        .btn:hover {
+        .right .btn:hover {
             transform: translateY(-5px);
             background-color: #FFCA28;
         }
@@ -124,20 +139,22 @@
         /* FOOTER */
         footer {
             background-color: #1A237E;
-            color: white;
-            text-align: center;
             padding: 30px;
-            margin-top: 60px;
+            color: white;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
         }
 
         footer p {
-            font-size: 1rem;
+            font-size: 1.1rem;
         }
 
         /* ANIMATIONS */
-        @keyframes slideIn {
+        @keyframes headerAnimation {
             from {
-                transform: translateY(-100%);
+                transform: translateY(100px);
                 opacity: 0;
             }
 
@@ -147,35 +164,41 @@
             }
         }
 
-        @keyframes fadeInUp {
+        @keyframes slideLeft {
             from {
-                transform: translateY(50px);
+                transform: translateX(-100%);
                 opacity: 0;
             }
 
             to {
-                transform: translateY(0);
+                transform: translateX(0);
                 opacity: 1;
             }
         }
 
-        /* MEDIA QUERY FOR RESPONSIVE DESIGN */
+        @keyframes slideRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* RESPONSIVE */
         @media screen and (max-width: 768px) {
             header h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
 
-            section h2 {
-                font-size: 2rem;
-            }
-
-            section p {
-                font-size: 1rem;
-            }
-
-            .btn {
-                padding: 12px 25px;
-                font-size: 1rem;
+            .left,
+            .right {
+                width: 100%;
+                position: relative;
+                transform: translateX(0);
             }
         }
     </style>
@@ -189,27 +212,21 @@
         <p>+1 647-987-0510 | <a href="mailto:toruldaksh@gmail.com">toruldaksh@gmail.com</a></p>
     </header>
 
-    <!-- PROFILE SECTION -->
-    <section>
+    <!-- LEFT SECTION: Profile and Education -->
+    <div class="left">
         <h2>Profile</h2>
         <p>Bilingual, holder of an <span class="highlight">LLQP</span> certificate and a <span class="highlight">Web Development Certificate</span>, I am currently pursuing a <span class="highlight">Diploma in Business Finance</span> at Sheridan’s Pilon School of Business.</p>
-        <div class="divider"></div>
-    </section>
-
-    <!-- EDUCATION SECTION -->
-    <section>
-        <h2>Education & Qualifications</h2>
+        <h2>Education</h2>
         <ul>
             <li><strong>Diploma in Business Finance</strong>, Sheridan School of Business (Sep 2024 - Present)</li>
             <li><strong>LLQP Certificate</strong> (Oct 2024)</li>
             <li><strong>Full Stack Web Development Bootcamp</strong>, Le Wagon (Aug 2023 - Dec 2023)</li>
             <li><strong>High School Graduate</strong>, A Level Cambridge International Exams (Nov 2022)</li>
         </ul>
-        <div class="divider"></div>
-    </section>
+    </div>
 
-    <!-- SKILLS SECTION -->
-    <section>
+    <!-- RIGHT SECTION: Skills, Projects, Experience -->
+    <div class="right">
         <h2>Skills</h2>
         <ul>
             <li>Strong verbal and communication skills - Bilingual (English & French)</li>
@@ -219,33 +236,14 @@
             <li>Collaboration and teamwork</li>
             <li>Leadership</li>
         </ul>
-        <div class="divider"></div>
-    </section>
-
-    <!-- PROJECTS SECTION -->
-    <section>
         <h2>Projects</h2>
         <ul>
             <li><strong>Save The Plate:</strong> A platform enabling users to purchase food from nearby locations.</li>
             <li><strong>Melody Market:</strong> An online platform facilitating the rent of musical instruments.</li>
             <li><strong>GMTK Jam Game Development:</strong> Created a game within 48 hours for a game development competition.</li>
         </ul>
-        <div class="divider"></div>
-    </section>
-
-    <!-- PROFESSIONAL EXPERIENCE SECTION -->
-    <section>
-        <h2>Professional Experience</h2>
-        <p><strong>Salesperson and Clerk</strong>, Wellina Cosy Shop (Jan 2023 - Dec 2023)</p>
-        <ul>
-            <li>Attending to customers’ requests</li>
-            <li>Taking and fulfilling online orders</li>
-            <li>Daily reconciliation of takings with sales invoices, balancing cash float, and ensuring prompt banking</li>
-            <li>Recording daily transactions</li>
-            <li>Maintaining stock in an orderly manner and performing regular inventory counts</li>
-        </ul>
-        <div class="divider"></div>
-    </section>
+        <a href="mailto:toruldaksh@gmail.com" class="btn">Contact Me</a>
+    </div>
 
     <!-- FOOTER -->
     <footer>
