@@ -1,121 +1,928 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dakshveer K. Torul - CV</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            background-color: #f8f9fa;
-            color: #333;
-        }
-        .header {
-            text-align: center;
-            padding: 30px;
-            background-color: #0a2540;
-            color: white;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .header h1 {
-            font-size: 2.2rem;
-            font-weight: bold;
-        }
-        .header p {
-            font-size: 1rem;
-        }
-        .header a {
-            color: white;
-            text-decoration: none;
-        }
-        .section {
-            margin-bottom: 30px;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .section h2 {
-            border-bottom: 2px solid #0a2540;
-            padding-bottom: 5px;
-            margin-bottom: 15px;
-            color: #0a2540;
-            font-size: 1.4rem;
-        }
-        .highlight {
-            color: #0a2540;
-            font-weight: bold;
-        }
-        footer {
-            background-color: #0a2540;
-            color: white;
-            padding: 15px;
-            text-align: center;
-            margin-top: 30px;
-            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
-        }
-        footer p {
-            font-size: 1rem;
-        }
-    </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dakshveer K. Torul — Finance Professional</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Neue+Haas+Grotesk+Display+Pro:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --cream: #f5f0e8;
+    --ink: #0e0c0a;
+    --gold: #b8860b;
+    --gold-light: #d4a520;
+    --rust: #8b3a1e;
+    --muted: #6b6560;
+    --line: rgba(14,12,10,0.12);
+    --card-bg: rgba(255,255,255,0.55);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Mono', monospace;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    position: fixed;
+    width: 10px; height: 10px;
+    background: var(--gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%,-50%);
+    transition: transform 0.08s ease, background 0.3s;
+    mix-blend-mode: multiply;
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 36px; height: 36px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%,-50%);
+    transition: transform 0.18s ease, width 0.3s, height 0.3s, opacity 0.3s;
+    opacity: 0.6;
+  }
+
+  /* Noise texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.4;
+  }
+
+  /* Progress bar */
+  #progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--rust));
+    width: 0%;
+    z-index: 100;
+    transition: width 0.1s linear;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 3rem;
+    background: rgba(245,240,232,0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.25s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px; left: 0;
+    width: 0; height: 1px;
+    background: var(--gold);
+    transition: width 0.3s ease;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a:hover::after { width: 100%; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 2rem 4rem 0;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-eyebrow {
+    font-size: 0.62rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.8rem;
+    opacity: 0;
+    animation: slideUp 0.8s 0.3s forwards;
+  }
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.2rem, 6vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.3rem;
+    opacity: 0;
+    animation: slideUp 0.9s 0.5s forwards;
+  }
+  .hero-name em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    font-weight: 300;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    margin-bottom: 2.8rem;
+    opacity: 0;
+    animation: slideUp 0.9s 0.7s forwards;
+  }
+  .hero-bio {
+    font-size: 0.78rem;
+    line-height: 1.9;
+    color: var(--muted);
+    max-width: 420px;
+    margin-bottom: 2.8rem;
+    opacity: 0;
+    animation: slideUp 0.9s 0.9s forwards;
+  }
+  .hero-contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: slideUp 0.9s 1.1s forwards;
+  }
+  .hero-contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.05em;
+    color: var(--ink);
+    text-decoration: none;
+    transition: color 0.25s;
+  }
+  .hero-contact-item:hover { color: var(--gold); }
+  .contact-dot {
+    width: 5px; height: 5px;
+    background: var(--gold);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* Hero right — decorative */
+  .hero-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-graphic {
+    position: relative;
+    width: 340px; height: 340px;
+  }
+  .hero-circle {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    animation: spin linear infinite;
+  }
+  .hc1 { inset: 0; animation-duration: 40s; }
+  .hc2 { inset: 30px; border-color: var(--gold); opacity: 0.3; animation-duration: 28s; animation-direction: reverse; }
+  .hc3 { inset: 70px; animation-duration: 60s; }
+  .hero-monogram {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 6rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--gold);
+    opacity: 0.25;
+    animation: fadeIn 2s 1.5s both;
+  }
+  .hero-badge {
+    position: absolute;
+    bottom: 20px; right: -20px;
+    background: var(--ink);
+    color: var(--cream);
+    padding: 1rem 1.4rem;
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    line-height: 1.8;
+    opacity: 0;
+    animation: slideUp 0.9s 1.4s forwards;
+  }
+
+  /* Diagonal divider */
+  .divider-line {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 0 0 5rem 0;
+    opacity: 0.4;
+  }
+
+  /* SECTIONS */
+  section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 5rem 3rem;
+  }
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 3.5rem;
+  }
+  .section-number {
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    font-family: 'DM Mono', monospace;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 300;
+    letter-spacing: -0.01em;
+  }
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+    align-self: center;
+  }
+
+  /* EDUCATION CARDS */
+  .edu-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+  .edu-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--line);
+    padding: 2rem 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: 1rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  .edu-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, var(--gold), var(--rust));
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.4s ease;
+  }
+  .edu-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    border-color: rgba(184,134,11,0.3);
+  }
+  .edu-card:hover::before { transform: scaleY(1); }
+  .edu-degree {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin-bottom: 0.3rem;
+  }
+  .edu-school {
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .edu-cert-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid currentColor;
+    padding: 0.3rem 0.8rem;
+    margin-top: 0.6rem;
+  }
+  .edu-year {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    white-space: nowrap;
+    padding-top: 0.2rem;
+  }
+
+  /* EXPERIENCE */
+  .exp-block {
+    position: relative;
+    padding-left: 2.5rem;
+    margin-bottom: 3rem;
+    opacity: 0;
+    transform: translateX(-15px);
+  }
+  .exp-block::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 6px;
+    width: 8px; height: 8px;
+    border: 1.5px solid var(--gold);
+    transform: rotate(45deg);
+    transition: background 0.3s;
+  }
+  .exp-block::after {
+    content: '';
+    position: absolute;
+    left: 3.5px; top: 22px;
+    width: 1px;
+    height: calc(100% + 1rem);
+    background: var(--line);
+  }
+  .exp-block:last-child::after { display: none; }
+  .exp-block:hover::before { background: var(--gold); }
+  .exp-role {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    margin-bottom: 0.2rem;
+  }
+  .exp-meta {
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .exp-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+  .exp-bullets li {
+    font-size: 0.75rem;
+    line-height: 1.75;
+    color: var(--muted);
+    padding-left: 1.2rem;
+    position: relative;
+  }
+  .exp-bullets li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 0.7rem;
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+  }
+  .skill-pill {
+    border: 1px solid var(--line);
+    padding: 0.9rem 1.2rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  .skill-pill::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--gold), var(--rust));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 0;
+  }
+  .skill-pill span { position: relative; z-index: 1; }
+  .skill-pill:hover {
+    color: var(--cream);
+    border-color: var(--gold);
+    transform: translateY(-3px);
+  }
+  .skill-pill:hover::before { opacity: 1; }
+
+  /* LANGUAGES */
+  .lang-row {
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+  .lang-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    opacity: 0;
+  }
+  .lang-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    font-style: italic;
+  }
+  .lang-level {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .lang-bar {
+    width: 120px; height: 2px;
+    background: var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+  .lang-fill {
+    position: absolute;
+    top: 0; left: 0; height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--rust));
+    width: 0;
+    transition: width 1s ease 0.5s;
+  }
+
+  /* ACTIVITIES */
+  .activities-flex {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .activity-card {
+    flex: 1;
+    min-width: 220px;
+    background: var(--card-bg);
+    border: 1px solid var(--line);
+    padding: 1.8rem 2rem;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  .activity-card:hover {
+    border-color: rgba(184,134,11,0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 32px rgba(0,0,0,0.07);
+  }
+  .activity-icon {
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+  }
+  .activity-text {
+    font-size: 0.72rem;
+    line-height: 1.8;
+    color: var(--muted);
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 2.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 100%;
+    margin-top: 4rem;
+    background: rgba(14,12,10,0.03);
+  }
+  footer p {
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .footer-links a {
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--gold); }
+
+  /* Scroll reveal classes */
+  .revealed { opacity: 1 !important; transform: none !important; transition: opacity 0.7s ease, transform 0.7s ease; }
+
+  /* KEYFRAMES */
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 0.25; }
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50%       { opacity: 0.6; transform: scale(1.04); }
+  }
+
+  /* DOWNLOAD BTN */
+  .dl-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border: 1px solid var(--ink);
+    padding: 0.85rem 2rem;
+    color: var(--ink);
+    text-decoration: none;
+    margin-top: 2rem;
+    transition: all 0.3s ease;
+    cursor: none;
+    opacity: 0;
+    animation: slideUp 0.9s 1.3s forwards;
+  }
+  .dl-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--ink);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+    z-index: -1;
+  }
+  .dl-btn { position: relative; overflow: hidden; }
+  .dl-btn:hover {
+    color: var(--cream);
+    border-color: var(--ink);
+  }
+  .dl-btn:hover::before { transform: scaleX(1); }
+
+  /* Floating scroll indicator */
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.5rem; left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fadeIn 1s 2s forwards;
+    z-index: 2;
+  }
+  .scroll-hint span {
+    font-size: 0.55rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .scroll-line {
+    width: 1px; height: 40px;
+    background: linear-gradient(180deg, var(--gold), transparent);
+    animation: pulse 2s infinite;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; padding: 0 1.5rem; }
+    .hero-right { display: none; }
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 3rem 1.5rem; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+    .lang-bar { width: 80px; }
+  }
+</style>
 </head>
 <body>
-    <header class="header">
-        <h1>Dakshveer K. Torul</h1>
-        <p>Toronto, ON | +1 647-987-0510 | <a href="mailto:toruldaksh@gmail.com">toruldaksh@gmail.com</a></p>
-    </header>
 
-    <main class="container">
-        <section class="section">
-            <h2>Professional Profile</h2>
-            <p>Analytical and detail-oriented finance professional with a strong foundation in <span class="highlight">financial analysis, investment management, and risk assessment</span>. Bilingual (English & French) with expertise in <span class="highlight">wealth management, life insurance, and financial modeling</span>. Currently pursuing a <span class="highlight">Diploma in Business Finance</span> at Sheridan’s Pilon School of Business.</p>
-        </section>
+<div id="progress"></div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
-        <section class="section">
-            <h2>Education & Certifications</h2>
-            <ul>
-                <li><strong>Diploma in Business Finance</strong>, Sheridan Pilon School of Business (Sep 2024 - Present)</li>
-                <li><strong>LLQP Certification</strong> – Life Insurance & Investments (Oct 2024)</li>
-                <li><strong>Full Stack Web Development Bootcamp</strong>, Le Wagon (Aug 2023 - Dec 2023)</li>
-                <li><strong>A Level Cambridge International Exams</strong> (Nov 2022)</li>
-            </ul>
-        </section>
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">D. K. Torul</a>
+  <ul class="nav-links">
+    <li><a href="#education">Education</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
 
-        <section class="section">
-            <h2>Financial & Technical Skills</h2>
-            <ul>
-                <li><strong>Financial Analysis:</strong> Valuation techniques, investment analysis, risk assessment</li>
-                <li><strong>Investment Knowledge:</strong> Mutual funds, segregated funds, life insurance, equity markets</li>
-                <li><strong>Technical Proficiency:</strong> Advanced Excel (financial modeling, pivot tables), PowerPoint, financial data analysis</li>
-                <li><strong>Programming & Data:</strong> Python, SQL, HTML, CSS, JavaScript, API integrations</li>
-                <li><strong>Soft Skills:</strong> Strategic thinking, leadership, teamwork, and problem-solving</li>
-            </ul>
-        </section>
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Finance Professional · Mississauga, ON</p>
+    <h1 class="hero-name">Dakshveer<br><em>K. Torul</em></h1>
+    <p class="hero-title">Finance Graduate &amp; LLQP Certified</p>
+    <p class="hero-bio">
+      Sheridan College finance graduate with a diploma in Finance, LLQP certification, and CSC Volume 1 completed. Bilingual in English and French, seeking entry-level roles in financial services where analytical rigour meets client-facing excellence.
+    </p>
+    <div class="hero-contacts">
+      <a class="hero-contact-item" href="tel:6479870510"><span class="contact-dot"></span>647-987-0510</a>
+      <a class="hero-contact-item" href="mailto:toruldaksh@gmail.com"><span class="contact-dot"></span>toruldaksh@gmail.com</a>
+      <a class="hero-contact-item" href="https://www.linkedin.com/in/dakshveer-kushal-torul-599009281/" target="_blank"><span class="contact-dot"></span>LinkedIn Profile</a>
+    </div>
+    <a class="dl-btn" href="mailto:toruldaksh@gmail.com">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v7M3 5l3 3 3-3M1 10h10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Get in Touch
+    </a>
+  </div>
+  <div class="hero-right">
+    <div class="hero-graphic">
+      <div class="hero-circle hc1"></div>
+      <div class="hero-circle hc2"></div>
+      <div class="hero-circle hc3"></div>
+      <div class="hero-monogram">DT</div>
+      <div class="hero-badge">
+        LLQP Certified<br>CSC Vol.1 Passed<br>Bilingual EN / FR
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</div>
 
-        <section class="section">
-            <h2>Projects & Initiatives</h2>
-            <ul>
-                <li><strong>Investment Portfolio Tracker:</strong> Developed an Excel-based tool for tracking stock investments and portfolio performance.</li>
-                <li><strong>Save The Plate:</strong> Built a fintech platform enabling users to purchase surplus food from local vendors.</li>
-                <li><strong>Melody Market:</strong> Designed and launched an online rental marketplace for musical instruments.</li>
-            </ul>
-        </section>
+<div class="divider-line"></div>
 
-        <section class="section">
-            <h2>Professional Experience</h2>
-            <p><strong>Sales & Client Relations Associate</strong> | Wellina Cosy Shop, Toronto (Jan 2023 - Dec 2023)</p>
-            <ul>
-                <li>Managed client interactions, providing financial insights on purchase decisions.</li>
-                <li>Handled daily financial transactions, reconciliations, and sales reporting.</li>
-                <li>Analyzed sales data to optimize inventory management and cost efficiency.</li>
-            </ul>
-        </section>
-    </main>
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header">
+    <span class="section-number">01</span>
+    <h2 class="section-title">Education &amp; Certification</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="edu-grid">
+    <div class="edu-card reveal">
+      <div>
+        <div class="edu-degree">Diploma in Finance</div>
+        <div class="edu-school">Sheridan College</div>
+        <div class="edu-cert-badge">
+          <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><circle cx="4" cy="4" r="3.5" stroke="currentColor"/><path d="M2.5 4l1 1 2-2" stroke="currentColor" stroke-linecap="round"/></svg>
+          Completed
+        </div>
+      </div>
+      <div class="edu-year">2024 – 2026</div>
+    </div>
+    <div class="edu-card reveal">
+      <div>
+        <div class="edu-degree">Canadian Securities Course (CSC)</div>
+        <div class="edu-school">Canadian Securities Institute</div>
+        <div class="edu-cert-badge">
+          <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><circle cx="4" cy="4" r="3.5" stroke="currentColor"/><path d="M2.5 4l1 1 2-2" stroke="currentColor" stroke-linecap="round"/></svg>
+          Volume 1 Passed · In Progress
+        </div>
+      </div>
+      <div class="edu-year">2025 – Present</div>
+    </div>
+    <div class="edu-card reveal">
+      <div>
+        <div class="edu-degree">Life License Qualification Program (LLQP)</div>
+        <div class="edu-school">Industry Certification</div>
+        <div class="edu-cert-badge">
+          <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><circle cx="4" cy="4" r="3.5" stroke="currentColor"/><path d="M2.5 4l1 1 2-2" stroke="currentColor" stroke-linecap="round"/></svg>
+          Certified
+        </div>
+      </div>
+      <div class="edu-year">2024</div>
+    </div>
+  </div>
+</section>
 
-    <footer>
-        <p>&copy; 2024 Dakshveer K. Torul | Finance & Investment Professional</p>
-    </footer>
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <span class="section-number">02</span>
+    <h2 class="section-title">Work Experience</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="exp-block reveal-left">
+    <div class="exp-role">Sales Clerk</div>
+    <div class="exp-meta">Welina Cosy Shop · Mauritius &nbsp;·&nbsp; Jan 2023 – Dec 2023</div>
+    <ul class="exp-bullets">
+      <li>Attended an average of 30 clients per day, delivering consistent customer service and product guidance.</li>
+      <li>Managed and fulfilled online orders, coordinating restocking to ensure timely delivery and inventory control.</li>
+      <li>Performed daily reconciliation of cash takings against sales invoices, balanced the cash float, and ensured prompt banking.</li>
+      <li>Recorded daily transactions in a ledger, maintaining accurate and organized financial records.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header">
+    <span class="section-number">03</span>
+    <h2 class="section-title">Skills</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-pill reveal-scale"><span>Bilingual EN/FR</span></div>
+    <div class="skill-pill reveal-scale"><span>Customer Service</span></div>
+    <div class="skill-pill reveal-scale"><span>Microsoft Office</span></div>
+    <div class="skill-pill reveal-scale"><span>Excel (VLOOKUP)</span></div>
+    <div class="skill-pill reveal-scale"><span>Pivot Tables</span></div>
+    <div class="skill-pill reveal-scale"><span>Data Analysis</span></div>
+    <div class="skill-pill reveal-scale"><span>Data Entry</span></div>
+    <div class="skill-pill reveal-scale"><span>Attention to Detail</span></div>
+    <div class="skill-pill reveal-scale"><span>Teamwork</span></div>
+  </div>
+</section>
+
+<!-- ACTIVITIES -->
+<section>
+  <div class="section-header">
+    <span class="section-number">04</span>
+    <h2 class="section-title">Activities</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="activities-flex">
+    <div class="activity-card reveal">
+      <div class="activity-icon">📊</div>
+      <div class="activity-text">Member of the Sheridan Marketing Club — actively engaged in events, networking, and marketing initiatives on campus.</div>
+    </div>
+    <div class="activity-card reveal">
+      <div class="activity-icon">🦈</div>
+      <div class="activity-text">Attended a Business Mixer and participated in a Shark Tank Sprint, pitching ideas under competitive conditions.</div>
+    </div>
+  </div>
+</section>
+
+<!-- LANGUAGES -->
+<section id="contact">
+  <div class="section-header">
+    <span class="section-number">05</span>
+    <h2 class="section-title">Languages</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="lang-row">
+    <div class="lang-item reveal">
+      <div class="lang-name">English</div>
+      <div class="lang-level">Fluent</div>
+      <div class="lang-bar"><div class="lang-fill" data-width="100%"></div></div>
+    </div>
+    <div class="lang-item reveal">
+      <div class="lang-name">French</div>
+      <div class="lang-level">Fluent</div>
+      <div class="lang-bar"><div class="lang-fill" data-width="100%"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Dakshveer K. Torul · Finance Professional</p>
+  <ul class="footer-links">
+    <li><a href="tel:6479870510">647-987-0510</a></li>
+    <li><a href="mailto:toruldaksh@gmail.com">Email</a></li>
+    <li><a href="https://www.linkedin.com/in/dakshveer-kushal-torul-599009281/" target="_blank">LinkedIn</a></li>
+  </ul>
+</footer>
+
+<script>
+  // --- Custom cursor ---
+  const cursor = document.getElementById('cursor');
+  const ring   = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top  = my + 'px';
+  });
+
+  (function animRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    requestAnimationFrame(animRing);
+  })();
+
+  document.querySelectorAll('a, button, .skill-pill, .edu-card, .activity-card').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      ring.style.width = '55px'; ring.style.height = '55px';
+      ring.style.opacity = '1';
+      cursor.style.transform = 'translate(-50%,-50%) scale(0.5)';
+    });
+    el.addEventListener('mouseleave', () => {
+      ring.style.width = '36px'; ring.style.height = '36px';
+      ring.style.opacity = '0.6';
+      cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+    });
+  });
+
+  // --- Scroll progress ---
+  const prog = document.getElementById('progress');
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    prog.style.width = (scrolled / max * 100) + '%';
+  });
+
+  // --- Scroll reveal ---
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const delay = el.dataset.delay || (Array.from(el.parentNode.children).indexOf(el) * 100);
+        setTimeout(() => {
+          el.classList.add('revealed');
+          // Trigger lang bars
+          el.querySelectorAll('.lang-fill').forEach(bar => {
+            bar.style.width = bar.dataset.width;
+          });
+        }, parseInt(delay));
+        io.unobserve(el);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-scale, .lang-item').forEach((el, i) => {
+    el.dataset.delay = i * 100;
+    io.observe(el);
+  });
+
+  // Stagger edu-cards and skill-pills
+  document.querySelectorAll('.edu-card').forEach((el, i) => {
+    el.dataset.delay = i * 150;
+  });
+  document.querySelectorAll('.skill-pill').forEach((el, i) => {
+    el.dataset.delay = i * 70;
+  });
+
+  // Smooth anchor scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+</script>
 </body>
 </html>
