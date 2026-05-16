@@ -1,630 +1,598 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Dakshveer K. Torul</title>
-<link href="https://fonts.googleapis.com/css2?family=Freight+Display+Pro:ital,wght@0,300;1,300&family=Eskorte+Latin:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Cormorant+SC:wght@300;400;500&family=Crimson+Pro:ital,wght@0,200;0,300;0,400;1,200;1,300&display=swap" rel="stylesheet"/>
 <style>
-:root {
-  --navy:       #0b1931;
-  --navy-deep:  #070f1e;
-  --navy-mid:   #112244;
-  --navy-edge:  #1a3360;
-  --silver:     #c8d8f0;
-  --silver-dim: #7a96be;
-  --white:      #eef3fc;
-  --accent:     #4a90d9;
-  --accent-soft:rgba(74,144,217,0.12);
-  --line:       rgba(200,216,240,0.1);
-  --line-soft:  rgba(200,216,240,0.06);
+[data-theme="dark"] {
+  --bg:         #100e0b;
+  --bg2:        #161310;
+  --ink:        #e8e0d0;
+  --ink-dim:    #8a7f6e;
+  --ink-faint:  #3a342b;
+  --rule:       rgba(232,224,208,.1);
+  --rule-strong:rgba(232,224,208,.22);
+  --accent:     #c8a96e;
+  --accent-dim: rgba(200,169,110,.12);
+  --paper:      rgba(22,19,16,.7);
+}
+[data-theme="light"] {
+  --bg:         #f5f0e8;
+  --bg2:        #ede8de;
+  --ink:        #1a1510;
+  --ink-dim:    #6b6055;
+  --ink-faint:  #d8d0c0;
+  --rule:       rgba(26,21,16,.12);
+  --rule-strong:rgba(26,21,16,.28);
+  --accent:     #8b5e1a;
+  --accent-dim: rgba(139,94,26,.08);
+  --paper:      rgba(245,240,232,.8);
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
 
 body {
-  background: var(--navy);
-  color: var(--white);
-  font-family: 'Jost', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Crimson Pro', Georgia, serif;
   font-weight: 300;
+  font-size: 18px;
+  line-height: 1.7;
   overflow-x: hidden;
   cursor: none;
+  transition: background .5s, color .5s;
 }
 
-/* Cursor */
-#cur {
-  position: fixed; width: 7px; height: 7px;
-  background: var(--accent); border-radius: 50%;
-  pointer-events: none; z-index: 9999;
-  transform: translate(-50%,-50%);
-  transition: transform .1s;
+/* ── CURSOR ── */
+#dot {
+  position:fixed; width:5px; height:5px;
+  background:var(--accent); border-radius:50%;
+  pointer-events:none; z-index:9999;
+  transform:translate(-50%,-50%);
 }
-#cur-r {
-  position: fixed; width: 32px; height: 32px;
-  border: 1px solid rgba(74,144,217,.5); border-radius: 50%;
-  pointer-events: none; z-index: 9998;
-  transform: translate(-50%,-50%);
-  transition: width .35s, height .35s, opacity .35s;
+#ring {
+  position:fixed; width:24px; height:24px;
+  border:1px solid var(--accent);
+  border-radius:50%; opacity:.45;
+  pointer-events:none; z-index:9998;
+  transform:translate(-50%,-50%);
+  transition:width .3s, height .3s, opacity .3s;
 }
 
-/* Subtle scroll progress */
+/* ── THEME TOGGLE ── */
+#toggle {
+  position:fixed; top:2rem; right:2rem; z-index:500;
+  background:var(--paper); border:1px solid var(--rule-strong);
+  color:var(--ink-dim); cursor:none;
+  width:38px; height:38px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:.8rem;
+  transition:border-color .3s, color .3s, background .5s;
+  backdrop-filter:blur(10px);
+}
+#toggle:hover { border-color:var(--accent); color:var(--accent); }
+
+/* ── SCROLL BAR ── */
 #bar {
-  position: fixed; top:0; left:0; height:1px;
-  background: var(--accent); width:0; z-index:200;
+  position:fixed; top:0; left:0; height:1px;
+  background:var(--accent); width:0; z-index:999;
 }
 
-/* ── NAV ── */
-nav {
-  position: fixed; top:0; left:0; right:0; z-index:100;
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 1.6rem 4rem;
-  background: rgba(7,15,30,.75);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--line);
-}
-.logo {
-  font-family: 'Libre Baskerville', serif;
-  font-size: .85rem; letter-spacing: .06em;
-  color: var(--white); text-decoration: none; font-style: italic;
-}
-.nav-links { display:flex; gap:2.8rem; list-style:none; }
-.nav-links a {
-  font-size: .6rem; letter-spacing: .22em; text-transform: uppercase;
-  color: var(--silver-dim); text-decoration: none;
-  transition: color .25s; position: relative;
-}
-.nav-links a::after {
-  content:''; position:absolute; bottom:-4px; left:0;
-  width:0; height:1px; background:var(--accent); transition:width .3s;
-}
-.nav-links a:hover { color:var(--white); }
-.nav-links a:hover::after { width:100%; }
-
-/* ── HERO ── */
-.hero {
-  min-height: 100vh;
-  display: grid; grid-template-columns: 1fr 420px;
-  padding: 0 4rem; align-items: center;
-  position: relative; overflow: hidden;
-  gap: 4rem;
+/* ── PAGE CONTAINER ── */
+.page {
+  max-width:740px;
+  margin:0 auto;
+  padding:0 2.5rem;
+  position:relative;
 }
 
-/* Atmospheric background */
-.hero::before {
+/* Left margin rule */
+.page::before {
+  content:'';
+  position:fixed; top:0; bottom:0;
+  left:calc(50% - 370px - 52px);
+  width:1px;
+  background:var(--rule);
+  pointer-events:none;
+  transition:background .5s;
+}
+
+/* ── MASTHEAD ── */
+.masthead {
+  padding:4.5rem 0 0;
+  border-bottom:2px solid var(--rule-strong);
+}
+.masthead-top {
+  display:flex; justify-content:space-between; align-items:baseline;
+  margin-bottom:.9rem;
+}
+.folio {
+  font-family:'Cormorant SC', serif;
+  font-size:.6rem; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--ink-dim);
+}
+.folio-r { font-style:italic; }
+
+.name-block {
+  text-align:center;
+  padding:1.8rem 0 1.3rem;
+  border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+  margin-bottom:1rem;
+  position:relative;
+}
+.name-block::before {
   content:'';
   position:absolute; inset:0;
-  background:
-    radial-gradient(ellipse 70% 60% at 80% 40%, rgba(26,51,96,.6) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 80% at 10% 80%, rgba(11,25,49,.8) 0%, transparent 60%);
+  background:radial-gradient(ellipse 55% 90% at 50% 50%, var(--accent-dim), transparent);
   pointer-events:none;
 }
-
-/* Thin vertical rule on right edge of left col */
-.hero-left {
-  padding: 8rem 3rem 5rem 0;
-  position: relative; z-index:2;
-  border-right: 1px solid var(--line);
+.name-main {
+  font-family:'IM Fell English', serif;
+  font-size:clamp(2.8rem,6.5vw,4.8rem);
+  font-weight:400; line-height:1;
+  letter-spacing:.015em; color:var(--ink);
+  display:block;
+  opacity:0; animation:up .9s .1s forwards;
+}
+.name-sub {
+  font-family:'Cormorant Garamond', serif;
+  font-style:italic; font-weight:300;
+  font-size:clamp(1rem,2vw,1.4rem);
+  color:var(--ink-dim); letter-spacing:.1em;
+  margin-top:.4rem; display:block;
+  opacity:0; animation:up .8s .35s forwards;
 }
 
-.h-eyebrow {
-  font-size: .6rem; letter-spacing: .28em; text-transform: uppercase;
-  color: var(--accent); margin-bottom: 2.4rem;
-  opacity:0; animation: up .8s .2s forwards;
-  display:flex; align-items:center; gap:.8rem;
-}
-.h-eyebrow::before {
-  content:''; display:inline-block;
-  width:28px; height:1px; background:var(--accent);
-}
-
-.h-name {
-  font-family: 'Libre Baskerville', serif;
-  font-size: clamp(3rem,5.2vw,5rem);
-  font-weight: 400; line-height: 1.08;
-  letter-spacing: -.01em;
-  margin-bottom: .8rem;
-  opacity:0; animation: up .9s .4s forwards;
-}
-.h-name .italic { font-style:italic; color:var(--silver-dim); font-weight:400; }
-
-.h-role {
-  font-size: .7rem; letter-spacing: .18em; text-transform: uppercase;
-  color: var(--silver-dim); margin-bottom: 3rem;
-  opacity:0; animation: up .9s .6s forwards;
+.masthead-meta {
+  display:flex; justify-content:space-between; align-items:center;
+  flex-wrap:wrap; gap:.5rem;
+  padding:.5rem 0 .9rem;
+  font-family:'Cormorant SC', serif;
+  font-size:.58rem; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--ink-dim);
+  opacity:0; animation:up .7s .6s forwards;
 }
 
-.h-bio {
-  font-size: .82rem; line-height: 2;
-  color: var(--silver-dim); max-width: 500px;
-  margin-bottom: 3.2rem;
-  opacity:0; animation: up .9s .8s forwards;
+/* ── LEDE ── */
+.lede {
+  padding:3rem 0 2.8rem;
+  border-bottom:1px solid var(--rule);
+  display:grid; grid-template-columns:2fr 1fr;
+  gap:3rem;
+  opacity:0; animation:up .9s .75s forwards;
 }
+.lede-text {
+  font-size:1.22rem; line-height:1.78;
+  font-weight:300; font-style:italic; color:var(--ink);
+}
+.lede-text strong { font-style:normal; font-weight:400; }
+.lede-aside {
+  border-left:1px solid var(--rule);
+  padding-left:1.6rem;
+  display:flex; flex-direction:column; gap:1.3rem; justify-content:center;
+}
+.lede-link {
+  display:block; text-decoration:none;
+  transition:color .2s;
+}
+.lede-link .ll-label {
+  font-family:'Cormorant SC', serif;
+  font-size:.56rem; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--ink-dim); display:block; margin-bottom:.1rem;
+  transition:color .2s;
+}
+.lede-link .ll-val {
+  font-family:'Crimson Pro', serif;
+  font-style:italic; font-size:.9rem; color:var(--ink);
+  transition:color .2s;
+}
+.lede-link:hover .ll-label { color:var(--accent); }
+.lede-link:hover .ll-val   { color:var(--accent); }
 
-.h-contacts {
-  display:flex; flex-direction:column; gap:.55rem;
-  opacity:0; animation: up .9s 1s forwards;
-}
-.h-link {
-  display:flex; align-items:center; gap:.9rem;
-  font-size: .68rem; letter-spacing:.05em;
-  color: var(--silver-dim); text-decoration:none;
-  transition: color .25s; width:fit-content;
-}
-.h-link:hover { color:var(--white); }
-.h-dot { width:4px; height:4px; background:var(--accent); border-radius:50%; flex-shrink:0; }
+/* ── SECTION ── */
+section { padding:3rem 0; border-bottom:1px solid var(--rule); }
 
-/* Hero right — large typographic element */
-.hero-right {
-  position:relative; z-index:2;
-  display:flex; flex-direction:column; justify-content:center;
-  padding: 8rem 0 5rem 2.5rem;
-  gap: 2.5rem;
+.sec-label {
+  display:flex; align-items:center; gap:1.2rem; margin-bottom:2.2rem;
 }
-
-.cert-stack { display:flex; flex-direction:column; gap:1px; }
-.cert-item {
-  display:flex; align-items:center; justify-content:space-between;
-  padding: 1.3rem 1.6rem;
-  border: 1px solid var(--line);
-  background: rgba(17,34,68,.4);
-  transition: background .3s, border-color .3s;
-  opacity:0; animation: right .8s forwards;
+.sec-num {
+  font-family:'Cormorant Garamond', serif;
+  font-style:italic; font-size:2rem; font-weight:300;
+  color:var(--accent); opacity:.65; line-height:1; flex-shrink:0;
 }
-.cert-item:hover {
-  background: var(--accent-soft);
-  border-color: rgba(74,144,217,.3);
+.sec-title {
+  font-family:'IM Fell English', serif;
+  font-size:1.1rem; color:var(--ink);
 }
-.cert-item:nth-child(1){ animation-delay:.5s; }
-.cert-item:nth-child(2){ animation-delay:.65s; }
-.cert-item:nth-child(3){ animation-delay:.8s; }
-.cert-item:nth-child(4){ animation-delay:.95s; }
-
-.cert-label {
-  font-family:'Libre Baskerville',serif;
-  font-style:italic; font-size:.85rem; color:var(--white);
-}
-.cert-status {
-  font-size:.55rem; letter-spacing:.2em; text-transform:uppercase;
-  color:var(--accent);
-}
-
-.hero-location {
-  opacity:0; animation: up .8s 1.2s forwards;
-  font-size:.6rem; letter-spacing:.2em; text-transform:uppercase;
-  color:var(--silver-dim);
-  display:flex; align-items:center; gap:.8rem;
-  padding-top:1rem; border-top:1px solid var(--line);
-}
-.hero-location::before {
-  content:''; width:20px; height:1px; background:var(--line);
-}
-
-/* scroll cue */
-.scroll-cue {
-  position:absolute; bottom:2.5rem; left:4rem;
-  display:flex; align-items:center; gap:.8rem;
-  opacity:0; animation: fadeIn 1s 2s forwards; z-index:2;
-}
-.scroll-cue span {
-  font-size:.52rem; letter-spacing:.25em; text-transform:uppercase; color:var(--silver-dim);
-}
-.scroll-cue-line {
-  width:40px; height:1px;
-  background:linear-gradient(90deg, var(--accent), transparent);
-  animation: pulse 2s infinite;
-}
-
-/* ── SHARED SECTION ── */
-.section-wrap {
-  max-width:1080px; margin:0 auto; padding:5.5rem 4rem;
-}
-.s-head {
-  display:flex; align-items:center; gap:1.4rem; margin-bottom:4rem;
-}
-.s-num {
-  font-size:.55rem; letter-spacing:.25em; text-transform:uppercase; color:var(--accent);
-}
-.s-title {
-  font-family:'Libre Baskerville',serif;
-  font-size:clamp(1.6rem,2.5vw,2.2rem); font-weight:400;
-  letter-spacing:-.01em;
-}
-.s-rule { flex:1; height:1px; background:var(--line); }
+.sec-rule { flex:1; height:1px; background:var(--rule); }
 
 /* ── EDUCATION ── */
-.edu-list { display:flex; flex-direction:column; gap:0; }
-.edu-row {
+.edu-entry {
   display:grid; grid-template-columns:1fr auto;
-  align-items:center;
-  padding:1.8rem 0;
-  border-bottom:1px solid var(--line-soft);
-  gap:2rem;
-  opacity:0; transform:translateY(14px);
-  transition:opacity .6s, transform .6s;
+  gap:2rem; align-items:baseline;
+  padding:.95rem 0;
+  border-bottom:1px solid var(--rule);
+  opacity:0; transform:translateY(8px);
+  transition:opacity .5s, transform .5s;
 }
-.edu-row:first-child { border-top:1px solid var(--line-soft); }
-.edu-row:hover .edu-name { color:var(--accent); }
-.edu-name {
-  font-family:'Libre Baskerville',serif;
-  font-size:1.1rem; font-weight:400;
-  margin-bottom:.25rem; transition:color .25s;
+.edu-entry:first-of-type { border-top:1px solid var(--rule); }
+.edu-entry:hover .edu-title { color:var(--accent); }
+.edu-title {
+  font-family:'Cormorant Garamond', serif;
+  font-size:1.12rem; font-weight:400;
+  transition:color .25s; margin-bottom:.1rem;
 }
-.edu-sub {
-  font-size:.62rem; letter-spacing:.14em; text-transform:uppercase;
-  color:var(--silver-dim);
+.edu-inst {
+  font-family:'Cormorant SC', serif;
+  font-size:.58rem; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-dim);
 }
-.edu-badge {
-  font-size:.55rem; letter-spacing:.18em; text-transform:uppercase;
-  color:var(--accent); border:1px solid rgba(74,144,217,.3);
-  padding:.3rem .85rem; white-space:nowrap;
+.edu-right { text-align:right; }
+.edu-status {
+  font-family:'Cormorant SC', serif;
+  font-size:.56rem; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--accent); display:block; margin-bottom:.2rem;
 }
 .edu-year {
-  font-size:.62rem; letter-spacing:.08em; color:var(--silver-dim);
-  text-align:right;
+  font-family:'Crimson Pro', serif;
+  font-style:italic; font-size:.85rem; color:var(--ink-dim);
 }
 
 /* ── EXPERIENCE ── */
-.exp-block {
-  padding:0 0 3.5rem 2rem;
-  border-left:1px solid var(--line);
-  position:relative; margin-left:8px;
-  opacity:0; transform:translateX(-12px);
-  transition:opacity .6s, transform .6s;
+.exp-entry {
+  margin-bottom:2rem;
+  opacity:0; transform:translateY(8px);
+  transition:opacity .5s, transform .5s;
 }
-.exp-block::before {
-  content:''; position:absolute;
-  left:-5px; top:6px;
-  width:9px; height:9px;
-  background:var(--navy); border:1.5px solid var(--accent);
-  border-radius:50%;
-  transition:background .3s, box-shadow .3s;
+.exp-head {
+  display:flex; justify-content:space-between; align-items:baseline;
+  border-bottom:1px solid var(--rule); padding-bottom:.6rem; margin-bottom:1.1rem;
 }
-.exp-block:hover::before {
-  background:var(--accent);
-  box-shadow:0 0 10px rgba(74,144,217,.5);
-}
-.exp-block:last-child { border-left:1px solid transparent; }
 .exp-role {
-  font-family:'Libre Baskerville',serif;
-  font-size:1.2rem; font-weight:400; margin-bottom:.3rem;
+  font-family:'IM Fell English', serif; font-size:1.3rem;
 }
-.exp-where {
-  font-size:.6rem; letter-spacing:.18em; text-transform:uppercase;
-  color:var(--accent); margin-bottom:1.4rem;
+.exp-period {
+  font-family:'Crimson Pro', serif;
+  font-style:italic; font-size:.9rem; color:var(--ink-dim);
 }
-.exp-list { list-style:none; display:flex; flex-direction:column; gap:.7rem; }
-.exp-list li {
-  font-size:.76rem; line-height:1.85; color:var(--silver-dim);
-  padding-left:1.2rem; position:relative;
+.exp-org {
+  font-family:'Cormorant SC', serif;
+  font-size:.58rem; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--accent); margin-bottom:1.1rem; opacity:.8;
 }
-.exp-list li::before {
-  content:''; position:absolute; left:0; top:.7em;
-  width:5px; height:1px; background:var(--accent);
-}
+.exp-body { font-size:.95rem; line-height:2; color:var(--ink-dim); }
+.exp-body p { margin-bottom:.5rem; text-indent:1.4em; }
+.exp-body p:first-child { text-indent:0; }
 
-/* ── SKILLS ── */
-.skills-grid {
-  display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
-  gap:1px; background:var(--line-soft);
-  border:1px solid var(--line-soft);
+/* ── SKILLS — typeset column style ── */
+.skills-type {
+  column-count:3; column-gap:2rem;
 }
-.skill-cell {
-  background:var(--navy);
-  padding:1.2rem 1.5rem;
-  font-size:.62rem; letter-spacing:.14em; text-transform:uppercase;
-  color:var(--silver-dim);
-  transition:background .3s, color .3s;
-  opacity:0; transform:scale(.97);
-  transition:opacity .5s, transform .5s, background .3s, color .3s;
+.skill-word {
+  font-family:'Cormorant Garamond', serif;
+  font-size:1.05rem; font-weight:400; color:var(--ink-dim);
+  display:block; break-inside:avoid;
+  padding:.28rem 0; border-bottom:1px solid var(--rule);
+  transition:color .2s, padding-left .2s;
+  cursor:default;
+  opacity:0; transform:translateY(5px);
+  transition:opacity .4s, transform .4s, color .2s, padding-left .2s;
 }
-.skill-cell:hover {
-  background:var(--accent-soft);
-  color:var(--white);
-}
+.skill-word:hover { color:var(--ink); padding-left:.5rem; }
 
 /* ── ACTIVITIES ── */
-.act-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line-soft); border:1px solid var(--line-soft); }
-.act-cell {
-  background:var(--navy); padding:2.4rem 2rem;
-  opacity:0; transform:translateY(12px);
-  transition:opacity .6s, transform .6s, background .3s;
+.act-entry {
+  margin-bottom:2rem; padding-left:1.5rem;
+  border-left:1px solid var(--rule);
+  opacity:0; transform:translateX(-8px);
+  transition:opacity .5s, transform .5s, border-color .3s;
 }
-.act-cell:hover { background:rgba(17,34,68,.8); }
-.act-label {
-  font-size:.55rem; letter-spacing:.22em; text-transform:uppercase;
-  color:var(--accent); margin-bottom:1rem;
+.act-entry:hover { border-left-color:var(--accent); }
+.act-title {
+  font-family:'IM Fell English', serif; font-size:1.1rem; margin-bottom:.4rem;
 }
-.act-text { font-size:.75rem; line-height:1.9; color:var(--silver-dim); }
+.act-body { font-size:.92rem; line-height:1.9; color:var(--ink-dim); }
 
 /* ── LANGUAGES ── */
-.lang-pair { display:flex; gap:5rem; flex-wrap:wrap; }
-.lang-block {
-  opacity:0; transform:translateY(12px);
-  transition:opacity .6s, transform .6s;
+.lang-display {
+  display:flex; border:1px solid var(--rule);
 }
-.lang-name {
-  font-family:'Libre Baskerville',serif;
-  font-size:2.2rem; font-weight:400; font-style:italic;
-  color:var(--white); margin-bottom:.4rem;
+.lang-col {
+  flex:1; padding:2rem 2rem;
+  border-right:1px solid var(--rule);
+  transition:background .3s;
+  opacity:0; transform:translateY(8px);
+  transition:opacity .5s, transform .5s, background .3s;
 }
-.lang-lv {
-  font-size:.58rem; letter-spacing:.22em; text-transform:uppercase;
-  color:var(--accent); margin-bottom:1rem;
+.lang-col:last-child { border-right:none; }
+.lang-col:hover { background:var(--accent-dim); }
+.lang-name-big {
+  font-family:'IM Fell English', serif;
+  font-size:2.6rem; font-style:italic;
+  color:var(--ink); line-height:1; margin-bottom:.4rem;
 }
-.lang-bar { width:140px; height:1px; background:var(--line); position:relative; }
+.lang-level {
+  font-family:'Cormorant SC', serif;
+  font-size:.56rem; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--accent); display:block; margin-bottom:1rem;
+}
+.lang-track { height:1px; background:var(--rule); position:relative; }
 .lang-fill {
-  position:absolute; top:0; left:0; height:100%;
-  background:linear-gradient(90deg, var(--accent), var(--silver));
-  width:0; transition:width 1.2s ease .4s;
+  position:absolute; left:0; top:0; height:1px;
+  background:var(--accent); width:0;
+  transition:width 1.4s cubic-bezier(.4,0,.2,1) .2s;
 }
 
-/* ── FOOTER ── */
-footer {
-  border-top:1px solid var(--line);
-  padding:2rem 4rem;
-  display:flex; justify-content:space-between; align-items:center;
+/* ── COLOPHON ── */
+.colophon {
+  padding:2.5rem 0 4.5rem;
+  display:flex; justify-content:space-between; align-items:baseline;
+  border-top:none;
 }
-footer p { font-size:.58rem; letter-spacing:.15em; text-transform:uppercase; color:var(--silver-dim); }
-.foot-links { display:flex; gap:2rem; list-style:none; }
-.foot-links a { font-size:.58rem; letter-spacing:.15em; text-transform:uppercase; color:var(--silver-dim); text-decoration:none; transition:color .2s; }
-.foot-links a:hover { color:var(--accent); }
+.colophon-l {
+  font-family:'Cormorant Garamond', serif;
+  font-style:italic; font-size:.88rem; color:var(--ink-dim);
+}
+.colophon-r { display:flex; gap:2rem; }
+.colophon-r a {
+  font-family:'Cormorant SC', serif;
+  font-size:.56rem; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--ink-dim); text-decoration:none; transition:color .2s;
+}
+.colophon-r a:hover { color:var(--accent); }
 
 /* ── KEYFRAMES ── */
-@keyframes up    { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:none} }
-@keyframes right { from{opacity:0;transform:translateX(20px)} to{opacity:1;transform:none} }
-@keyframes fadeIn{ from{opacity:0} to{opacity:1} }
-@keyframes pulse { 0%,100%{opacity:.25} 50%{opacity:.9} }
-
+@keyframes up { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
 .revealed { opacity:1 !important; transform:none !important; }
 
-/* responsive */
-@media(max-width:800px){
-  .hero{grid-template-columns:1fr;padding:0 1.5rem;}
-  .hero-right{display:none;}
-  nav{padding:1.2rem 1.5rem;}
-  .nav-links{display:none;}
-  .section-wrap{padding:3.5rem 1.5rem;}
-  .act-grid{grid-template-columns:1fr;}
-  footer{flex-direction:column;gap:1rem;padding:2rem 1.5rem;}
+/* ── MOBILE ── */
+@media(max-width:620px){
+  .page{padding:0 1.2rem;}
+  .page::before{display:none;}
+  .lede{grid-template-columns:1fr; gap:1.5rem;}
+  .lede-aside{border-left:none; border-top:1px solid var(--rule); padding:1.2rem 0 0;}
+  .skills-type{column-count:2;}
+  .lang-display{flex-direction:column;}
+  .lang-col{border-right:none; border-bottom:1px solid var(--rule);}
+  .lang-col:last-child{border-bottom:none;}
+  .colophon{flex-direction:column; gap:1rem;}
+  #toggle{top:1rem; right:1rem;}
+  .masthead-meta{justify-content:center; gap:.6rem;}
+  .exp-head{flex-direction:column; gap:.2rem;}
 }
 </style>
 </head>
 <body>
+
 <div id="bar"></div>
-<div id="cur"></div>
-<div id="cur-r"></div>
+<div id="dot"></div>
+<div id="ring"></div>
+<button id="toggle" aria-label="Toggle theme"><span id="ti">☀</span></button>
 
-<nav>
-  <a class="logo" href="#">Dakshveer K. Torul</a>
-  <ul class="nav-links">
-    <li><a href="#edu">Education</a></li>
-    <li><a href="#exp">Experience</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
+<div class="page">
 
-<!-- ── HERO ── -->
-<div class="hero">
-  <div class="hero-left">
-    <div class="h-eyebrow">Finance · Mississauga, Ontario</div>
-    <h1 class="h-name">
-      Dakshveer<br>
-      <span class="italic">Kushal</span> Torul
-    </h1>
-    <p class="h-role">Aspiring Finance Professional &nbsp;·&nbsp; LLQP Certified &nbsp;·&nbsp; CSC Candidate</p>
-    <p class="h-bio">
-      Finance diploma from Sheridan College. LLQP certified, with CSC Volume 1 already cleared and Volume 2 in progress. Bilingual in English and French, with real-world experience in cash reconciliation and client-facing roles. Building toward a career in financial services with sharp analytical skills and genuine client focus.
-    </p>
-    <div class="h-contacts">
-      <a class="h-link" href="tel:6479870510"><span class="h-dot"></span>647-987-0510</a>
-      <a class="h-link" href="mailto:toruldaksh@gmail.com"><span class="h-dot"></span>toruldaksh@gmail.com</a>
-      <a class="h-link" href="https://www.linkedin.com/in/dakshveer-kushal-torul-599009281/" target="_blank"><span class="h-dot"></span>LinkedIn</a>
+  <header class="masthead">
+    <div class="masthead-top">
+      <span class="folio">Finance · Mississauga, Ontario</span>
+      <span class="folio folio-r">^^</span>
     </div>
-  </div>
-
-  <div class="hero-right">
-    <div class="cert-stack">
-      <div class="cert-item">
-        <span class="cert-label">Diploma in Finance</span>
-        <span class="cert-status">Sheridan College</span>
-      </div>
-      <div class="cert-item">
-        <span class="cert-label">LLQP</span>
-        <span class="cert-status">Certified ✓</span>
-      </div>
-      <div class="cert-item">
-        <span class="cert-label">CSC — Volume 1</span>
-        <span class="cert-status">Passed ✓</span>
-      </div>
-      <div class="cert-item">
-        <span class="cert-label">Bilingual EN / FR</span>
-        <span class="cert-status">Fluent</span>
-      </div>
+    <div class="name-block">
+      <span class="name-main">Dakshveer K. Torul</span>
+      <span class="name-sub">Finance Graduate · LLQP Certified · CSC Candidate</span>
     </div>
-    <div class="hero-location">Mississauga, Ontario, Canada</div>
+    <div class="masthead-meta">
+      <span>LLQP Certified</span>
+      <span>·</span>
+      <span>CSC in progress</span>
+      <span>·</span>
+      <span>Sheridan College</span>
+      <span>·</span>
+      <span>Bilingual EN / FR</span>
+    </div>
+  </header>
+
+  <div class="lede">
+    <div class="lede-text">
+      <strong>Finance diploma from Sheridan College.</strong> LLQP certified, with CSC Volume I cleared and Volume II in progress. Bilingual in English and French — building toward a career in financial services with sharp analytical instincts and genuine client focus.
+    </div>
+    <aside class="lede-aside">
+      <a class="lede-link" href="tel:6479870510">
+        <span class="ll-label">Phone</span>
+        <span class="ll-val">647-987-0510</span>
+      </a>
+      <a class="lede-link" href="mailto:toruldaksh@gmail.com">
+        <span class="ll-label">Email</span>
+        <span class="ll-val">toruldaksh@gmail.com</span>
+      </a>
+      <a class="lede-link" href="https://www.linkedin.com/in/dakshveer-k-torul-599009281/" target="_blank">
+        <span class="ll-label">LinkedIn</span>
+        <span class="ll-val">dakshveer-k-torul</span>
+      </a>
+    </aside>
   </div>
 
-  <div class="scroll-cue">
-    <div class="scroll-cue-line"></div>
-    <span>Scroll</span>
-  </div>
-</div>
-
-<!-- ── EDUCATION ── -->
-<div class="section-wrap" id="edu">
-  <div class="s-head">
-    <span class="s-num">01</span>
-    <h2 class="s-title">Education &amp; Certification</h2>
-    <div class="s-rule"></div>
-  </div>
-  <div class="edu-list">
-    <div class="edu-row reveal">
+  <section id="edu">
+    <div class="sec-label">
+      <span class="sec-num">I</span>
+      <h2 class="sec-title">Education &amp; Certification</h2>
+      <div class="sec-rule"></div>
+    </div>
+    <div class="edu-entry reveal">
       <div>
-        <div class="edu-name">Diploma in Finance</div>
-        <div class="edu-sub">Sheridan College</div>
+        <div class="edu-title">Diploma in Finance</div>
+        <div class="edu-inst">Sheridan College</div>
       </div>
-      <div style="text-align:right">
-        <div class="edu-badge">Completed</div>
-        <div class="edu-year" style="margin-top:.5rem">2024 – 2026</div>
+      <div class="edu-right">
+        <span class="edu-status">Completed</span>
+        <span class="edu-year">2024 – 2026</span>
       </div>
     </div>
-    <div class="edu-row reveal">
+    <div class="edu-entry reveal">
       <div>
-        <div class="edu-name">Canadian Securities Course (CSC)</div>
-        <div class="edu-sub">Canadian Securities Institute</div>
+        <div class="edu-title">Canadian Securities Course (CSC)</div>
+        <div class="edu-inst">Canadian Securities Institute</div>
       </div>
-      <div style="text-align:right">
-        <div class="edu-badge">Vol. 1 Passed · In Progress</div>
-        <div class="edu-year" style="margin-top:.5rem">2025 – Present</div>
+      <div class="edu-right">
+        <span class="edu-status">Vol. I Passed · In Progress</span>
+        <span class="edu-year">2025 – Present</span>
       </div>
     </div>
-    <div class="edu-row reveal">
+    <div class="edu-entry reveal">
       <div>
-        <div class="edu-name">Life License Qualification Program (LLQP)</div>
-        <div class="edu-sub">Industry Certification</div>
+        <div class="edu-title">Life License Qualification Program (LLQP)</div>
+        <div class="edu-inst">Industry Certification</div>
       </div>
-      <div style="text-align:right">
-        <div class="edu-badge">Certified</div>
-        <div class="edu-year" style="margin-top:.5rem">2024</div>
+      <div class="edu-right">
+        <span class="edu-status">Certified</span>
+        <span class="edu-year">2024</span>
       </div>
     </div>
-  </div>
-</div>
+  </section>
 
-<!-- ── EXPERIENCE ── -->
-<div class="section-wrap" id="exp" style="padding-top:0">
-  <div class="s-head">
-    <span class="s-num">02</span>
-    <h2 class="s-title">Work Experience</h2>
-    <div class="s-rule"></div>
-  </div>
-  <div class="exp-block reveal-left">
-    <div class="exp-role">Sales Clerk</div>
-    <div class="exp-where">Welina Cosy Shop · Mauritius · Jan – Dec 2023</div>
-    <ul class="exp-list">
-      <li>Assisted an average of 30 clients daily, providing attentive product guidance and maintaining high service standards throughout each interaction.</li>
-      <li>Handled and fulfilled online orders, coordinating restocking to maintain inventory levels and ensure timely delivery.</li>
-      <li>Conducted daily cash reconciliation against sales invoices, balanced the cash float, and ensured accurate and prompt banking deposits.</li>
-      <li>Maintained a daily transaction ledger with precise, organised financial records.</li>
-    </ul>
-  </div>
-</div>
-
-<!-- ── SKILLS ── -->
-<div class="section-wrap" id="skills" style="padding-top:0">
-  <div class="s-head">
-    <span class="s-num">03</span>
-    <h2 class="s-title">Skills</h2>
-    <div class="s-rule"></div>
-  </div>
-  <div class="skills-grid">
-    <div class="skill-cell reveal-s">Bilingual EN / FR</div>
-    <div class="skill-cell reveal-s">Customer Service</div>
-    <div class="skill-cell reveal-s">Microsoft Office</div>
-    <div class="skill-cell reveal-s">Excel — VLOOKUP</div>
-    <div class="skill-cell reveal-s">Pivot Tables</div>
-    <div class="skill-cell reveal-s">Data Analysis</div>
-    <div class="skill-cell reveal-s">Data Entry</div>
-    <div class="skill-cell reveal-s">Attention to Detail</div>
-    <div class="skill-cell reveal-s">Teamwork</div>
-  </div>
-</div>
-
-<!-- ── ACTIVITIES ── -->
-<div class="section-wrap" style="padding-top:0">
-  <div class="s-head">
-    <span class="s-num">04</span>
-    <h2 class="s-title">Activities</h2>
-    <div class="s-rule"></div>
-  </div>
-  <div class="act-grid">
-    <div class="act-cell reveal">
-      <div class="act-label">Marketing Club</div>
-      <p class="act-text">Active member of the Sheridan Marketing Club — participating in events, networking sessions, and campus initiatives that build commercial awareness and professional connections.</p>
+  <section id="exp">
+    <div class="sec-label">
+      <span class="sec-num">II</span>
+      <h2 class="sec-title">Work Experience</h2>
+      <div class="sec-rule"></div>
     </div>
-    <div class="act-cell reveal">
-      <div class="act-label">Shark Tank Sprint</div>
-      <p class="act-text">Attended a Business Mixer and competed in a Shark Tank Sprint, pitching business ideas under competitive conditions and receiving real-time feedback from industry professionals.</p>
+    <div class="exp-entry reveal">
+      <div class="exp-head">
+        <span class="exp-role">Sales Clerk</span>
+        <span class="exp-period">Jan – Dec 2023</span>
+      </div>
+      <div class="exp-org">Welina Cosy Shop · Mauritius</div>
+      <div class="exp-body">
+        <p>Assisted an average of 30 clients daily, providing attentive product guidance and maintaining high service standards throughout each interaction.</p>
+        <p>Handled and fulfilled online orders, coordinating restocking to maintain inventory levels and ensure timely delivery.</p>
+        <p>Conducted daily cash reconciliation against sales invoices, balanced the cash float, and ensured accurate and prompt banking deposits.</p>
+        <p>Maintained a daily transaction ledger with precise, organised financial records.</p>
+      </div>
     </div>
-  </div>
-</div>
+  </section>
 
-<!-- ── LANGUAGES ── -->
-<div class="section-wrap" id="contact" style="padding-top:0">
-  <div class="s-head">
-    <span class="s-num">05</span>
-    <h2 class="s-title">Languages</h2>
-    <div class="s-rule"></div>
-  </div>
-  <div class="lang-pair">
-    <div class="lang-block reveal">
-      <div class="lang-name">English</div>
-      <div class="lang-lv">Fluent</div>
-      <div class="lang-bar"><div class="lang-fill" data-w="100%"></div></div>
+  <section id="skills">
+    <div class="sec-label">
+      <span class="sec-num">III</span>
+      <h2 class="sec-title">Skills</h2>
+      <div class="sec-rule"></div>
     </div>
-    <div class="lang-block reveal">
-      <div class="lang-name">French</div>
-      <div class="lang-lv">Fluent</div>
-      <div class="lang-bar"><div class="lang-fill" data-w="100%"></div></div>
+    <div class="skills-type">
+      <span class="skill-word reveal-s">Bilingual EN / FR</span>
+      <span class="skill-word reveal-s">Customer Service</span>
+      <span class="skill-word reveal-s">Microsoft Office</span>
+      <span class="skill-word reveal-s">Excel — VLOOKUP</span>
+      <span class="skill-word reveal-s">Pivot Tables</span>
+      <span class="skill-word reveal-s">Data Analysis</span>
+      <span class="skill-word reveal-s">Data Entry</span>
+      <span class="skill-word reveal-s">Attention to Detail</span>
+      <span class="skill-word reveal-s">Teamwork</span>
     </div>
-  </div>
-</div>
+  </section>
 
-<footer>
-  <p>© 2026 Dakshveer K. Torul</p>
-  <ul class="foot-links">
-    <li><a href="tel:6479870510">647-987-0510</a></li>
-    <li><a href="mailto:toruldaksh@gmail.com">Email</a></li>
-    <li><a href="https://www.linkedin.com/in/dakshveer-kushal-torul-599009281/" target="_blank">LinkedIn</a></li>
-  </ul>
-</footer>
+  <section>
+    <div class="sec-label">
+      <span class="sec-num">IV</span>
+      <h2 class="sec-title">Activities</h2>
+      <div class="sec-rule"></div>
+    </div>
+    <div class="act-entry reveal-l">
+      <div class="act-title">Marketing Club — Sheridan College</div>
+      <div class="act-body">Active member participating in events, networking sessions, and campus initiatives that build commercial awareness and professional connections.</div>
+    </div>
+    <div class="act-entry reveal-l">
+      <div class="act-title">Shark Tank Sprint — Business Mixer</div>
+      <div class="act-body">Competed under live conditions, pitching business ideas and receiving real-time feedback from industry professionals.</div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="sec-label">
+      <span class="sec-num">V</span>
+      <h2 class="sec-title">Languages</h2>
+      <div class="sec-rule"></div>
+    </div>
+    <div class="lang-display">
+      <div class="lang-col reveal">
+        <div class="lang-name-big">English</div>
+        <span class="lang-level">Native Fluency</span>
+        <div class="lang-track"><div class="lang-fill" data-w="100%"></div></div>
+      </div>
+      <div class="lang-col reveal">
+        <div class="lang-name-big">Français</div>
+        <span class="lang-level">Full Fluency</span>
+        <div class="lang-track"><div class="lang-fill" data-w="100%"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="colophon">
+    <span class="colophon-l">© 2026 Dakshveer Kushal Torul — Mississauga, Ontario</span>
+    <div class="colophon-r">
+      <a href="tel:6479870510">Phone</a>
+      <a href="mailto:toruldaksh@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/dakshveer-k-torul-599009281/" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+
+</div>
 
 <script>
-  // Cursor
-  const cur=document.getElementById('cur'), ring=document.getElementById('cur-r');
-  let mx=0,my=0,rx=0,ry=0;
-  document.addEventListener('mousemove',e=>{
-    mx=e.clientX;my=e.clientY;
-    cur.style.left=mx+'px';cur.style.top=my+'px';
-  });
-  (function loop(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
-  document.querySelectorAll('a,button,.cert-item,.skill-cell,.act-cell,.edu-row').forEach(el=>{
-    el.addEventListener('mouseenter',()=>{ring.style.width='48px';ring.style.height='48px';ring.style.opacity='1';cur.style.transform='translate(-50%,-50%) scale(.5)';});
-    el.addEventListener('mouseleave',()=>{ring.style.width='32px';ring.style.height='32px';ring.style.opacity='.5';cur.style.transform='translate(-50%,-50%) scale(1)';});
-  });
+// Cursor
+const dot=document.getElementById('dot'), ring=document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX; my=e.clientY;
+  dot.style.left=mx+'px'; dot.style.top=my+'px';
+});
+(function t(){rx+=(mx-rx)*.13;ry+=(my-ry)*.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(t);})();
+document.querySelectorAll('a,button,.edu-entry,.skill-word,.act-entry,.lang-col').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ring.style.width='38px';ring.style.height='38px';ring.style.opacity='.85';});
+  el.addEventListener('mouseleave',()=>{ring.style.width='24px';ring.style.height='24px';ring.style.opacity='.45';});
+});
 
-  // Progress bar
-  const bar=document.getElementById('bar');
-  window.addEventListener('scroll',()=>{
-    bar.style.width=(window.scrollY/(document.documentElement.scrollHeight-innerHeight)*100)+'%';
+// Scroll bar
+const bar=document.getElementById('bar');
+window.addEventListener('scroll',()=>{
+  bar.style.width=(window.scrollY/(document.documentElement.scrollHeight-innerHeight)*100)+'%';
+});
+
+// Theme
+const html=document.documentElement, ti=document.getElementById('ti');
+document.getElementById('toggle').addEventListener('click',()=>{
+  const dark=html.dataset.theme==='dark';
+  html.dataset.theme=dark?'light':'dark';
+  ti.textContent=dark?'☽':'☀';
+});
+
+// Reveal
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(!entry.isIntersecting)return;
+    const el=entry.target;
+    const siblings=[...el.parentNode.children].filter(c=>
+      c.classList.contains('reveal')||c.classList.contains('reveal-l')||c.classList.contains('reveal-s')
+    );
+    const i=siblings.indexOf(el);
+    setTimeout(()=>{
+      el.classList.add('revealed');
+      el.querySelectorAll('.lang-fill').forEach(b=>{b.style.width=b.dataset.w;});
+    },i*80);
+    io.unobserve(el);
   });
+},{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal,.reveal-l,.reveal-s').forEach(el=>io.observe(el));
 
-  // Scroll reveal
-  const io=new IntersectionObserver(entries=>{
-    entries.forEach(entry=>{
-      if(!entry.isIntersecting)return;
-      const el=entry.target;
-      const i=[...el.parentNode.children].indexOf(el);
-      setTimeout(()=>{
-        el.classList.add('revealed');
-        el.querySelectorAll('.lang-fill').forEach(b=>{b.style.width=b.dataset.w;});
-      }, i*120);
-      io.unobserve(el);
-    });
-  },{threshold:.1,rootMargin:'0px 0px -40px 0px'});
-
-  document.querySelectorAll('.reveal,.reveal-left,.reveal-s,.lang-block').forEach(el=>io.observe(el));
-
-  // Smooth scroll
-  document.querySelectorAll('a[href^="#"]').forEach(a=>{
-    a.addEventListener('click',e=>{
-      const t=document.querySelector(a.getAttribute('href'));
-      if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}
-    });
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}
   });
+});
 </script>
 </body>
 </html>
