@@ -1,7 +1,611 @@
 <!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dakshveer K. Torul</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Cormorant+SC:wght@300;400;500&family=Crimson+Pro:ital,wght@0,200;0,300;0,400;1,200;1,300&display=swap" rel="stylesheet"/>
+<style>
+[data-theme="dark"] {
+  --bg:         #100e0b;
+  --bg2:        #161310;
+  --ink:        #e8e0d0;
+  --ink-dim:    #8a7f6e;
+  --ink-faint:  #3a342b;
+  --rule:       rgba(232,224,208,.1);
+  --rule-strong:rgba(232,224,208,.22);
+  --accent:     #c8a96e;
+  --accent-dim: rgba(200,169,110,.12);
+  --paper:      rgba(22,19,16,.7);
+}
+[data-theme="light"] {
+  --bg:         #f5f0e8;
+  --bg2:        #ede8de;
+  --ink:        #1a1510;
+  --ink-dim:    #6b6055;
+  --ink-faint:  #d8d0c0;
+  --rule:       rgba(26,21,16,.12);
+  --rule-strong:rgba(26,21,16,.28);
+  --accent:     #8b5e1a;
+  --accent-dim: rgba(139,94,26,.08);
+  --paper:      rgba(245,240,232,.8);
+}
+
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Crimson Pro', Georgia, serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 1.7;
+  overflow-x: hidden;
+  cursor: none;
+  transition: background .5s, color .5s;
+}
+
+/* ── CURSOR ── */
+#dot {
+  position:fixed; width:5px; height:5px;
+  background:var(--accent); border-radius:50%;
+  pointer-events:none; z-index:9999;
+  transform:translate(-50%,-50%);
+}
+#ring {
+  position:fixed; width:24px; height:24px;
+  border:1px solid var(--accent);
+  border-radius:50%; opacity:.45;
+  pointer-events:none; z-index:9998;
+  transform:translate(-50%,-50%);
+  transition:width .3s, height .3s, opacity .3s;
+}
+
+/* ── THEME TOGGLE ── */
+#toggle {
+  position:fixed; top:2rem; right:2rem; z-index:500;
+  background:var(--paper); border:1px solid var(--rule-strong);
+  color:var(--ink-dim); cursor:none;
+  width:38px; height:38px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:.8rem;
+  transition:border-color .3s, color .3s, background .5s;
+  backdrop-filter:blur(10px);
+}
+#toggle:hover { border-color:var(--accent); color:var(--accent); }
+
+/* ── SCROLL BAR ── */
+#bar {
+  position:fixed; top:0; left:0; height:1px;
+  background:var(--accent); width:0; z-index:999;
+}
+
+/* ── PAGE CONTAINER ── */
+.page {
+  max-width:740px;
+  margin:0 auto;
+  padding:0 2.5rem;
+  position:relative;
+}
+
+/* Left margin rule */
+.page::before {
+  content:'';
+  position:fixed; top:0; bottom:0;
+  left:calc(50% - 370px - 52px);
+  width:1px;
+  background:var(--rule);
+  pointer-events:none;
+  transition:background .5s;
+}
+
+/* ── MASTHEAD ── */
+.masthead {
+  padding:4.5rem 0 0;
+  border-bottom:2px solid var(--rule-strong);
+}
+.masthead-top {
+  display:flex; justify-content:space-between; align-items:baseline;
+  margin-bottom:.9rem;
+}
+.folio {
+  font-family:'Cormorant SC', serif;
+  font-size:.6rem; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--ink-dim);
+}
+.folio-r { font-style:italic; }
+
+.name-block {
+  text-align:center;
+  padding:1.8rem 0 1.3rem;
+  border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+  margin-bottom:1rem;
+  position:relative;
+}
+.name-block::before {
+  content:'';
+  position:absolute; inset:0;
+  background:radial-gradient(ellipse 55% 90% at 50% 50%, var(--accent-dim), transparent);
+  pointer-events:none;
+}
+.name-main {
+  font-family:'IM Fell English', serif;
+  font-size:clamp(2.8rem,6.5vw,4.8rem);
+  font-weight:400; line-height:1;
+  letter-spacing:.015em; color:var(--ink);
+  display:block;
+  opacity:0; animation:up .9s .1s forwards;
+}
+.name-sub {
+  font-family:'Cormorant Garamond', serif;
+  font-style:italic; font-weight:300;
+  font-size:clamp(1rem,2vw,1.4rem);
+  color:var(--ink-dim); letter-spacing:.1em;
+  margin-top:.4rem; display:block;
+  opacity:0; animation:up .8s .35s forwards;
+}
+
+.masthead-meta {
+  display:flex; justify-content:space-between; align-items:center;
+  flex-wrap:wrap; gap:.5rem;
+  padding:.5rem 0 .9rem;
+  font-family:'Cormorant SC', serif;
+  font-size:.58rem; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--ink-dim);
+  opacity:0; animation:up .7s .6s forwards;
+}
+
+/* ── LEDE ── */
+.lede {
+  padding:3rem 0 2.8rem;
+  border-bottom:1px solid var(--rule);
+  display:grid; grid-template-columns:2fr 1fr;
+  gap:3rem;
+  opacity:0; animation:up .9s .75s forwards;
+}
+.lede-text {
+  font-size:1.22rem; line-height:1.78;
+  font-weight:300; font-style:italic; color:var(--ink);
+}
+.lede-text strong { font-style:normal; font-weight:400; }
+.lede-aside {
+  border-left:1px solid var(--rule);
+  padding-left:1.6rem;
+  display:flex; flex-direction:column; gap:1.3rem; justify-content:center;
+}
+.lede-link {
+  display:block; text-decoration:none;
+  transition:color .2s;
+}
+.lede-link .ll-label {
+  font-family:'Cormorant SC', serif;
+  font-size:.56rem; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--ink-dim); display:block; margin-bottom:.1rem;
+  transition:color .2s;
+}
+.lede-link .ll-val {
+  font-family:'Crimson Pro', serif;
+  font-style:italic; font-size:.9rem; color:var(--ink);
+  transition:color .2s;
+}
+.lede-link:hover .ll-label { color:var(--accent); }
+.lede-link:hover .ll-val   { color:var(--accent); }
+
+/* ── SECTION ── */
+section { padding:3rem 0; border-bottom:1px solid var(--rule); }
+
+.sec-label {
+  display:flex; align-items:center; gap:1.2rem; margin-bottom:2.2rem;
+}
+.sec-num {
+  font-family:'Cormorant Garamond', serif;
+  font-style:italic; font-size:2rem; font-weight:300;
+  color:var(--accent); opacity:.65; line-height:1; flex-shrink:0;
+}
+.sec-title {
+  font-family:'IM Fell English', serif;
+  font-size:1.1rem; color:var(--ink);
+}
+.sec-rule { flex:1; height:1px; background:var(--rule); }
+
+/* ── EDUCATION ── */
+.edu-entry {
+  display:grid; grid-template-columns:1fr auto;
+  gap:2rem; align-items:baseline;
+  padding:.95rem 0;
+  border-bottom:1px solid var(--rule);
+  opacity:0; transform:translateY(8px);
+  transition:opacity .5s, transform .5s;
+}
+.edu-entry:first-of-type { border-top:1px solid var(--rule); }
+.edu-entry:hover .edu-title { color:var(--accent); }
+.edu-title {
+  font-family:'Cormorant Garamond', serif;
+  font-size:1.12rem; font-weight:400;
+  transition:color .25s; margin-bottom:.1rem;
+}
+.edu-inst {
+  font-family:'Cormorant SC', serif;
+  font-size:.58rem; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-dim);
+}
+.edu-right { text-align:right; }
+.edu-status {
+  font-family:'Cormorant SC', serif;
+  font-size:.56rem; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--accent); display:block; margin-bottom:.2rem;
+}
+.edu-year {
+  font-family:'Crimson Pro', serif;
+  font-style:italic; font-size:.85rem; color:var(--ink-dim);
+}
+
+/* ── EXPERIENCE ── */
+.exp-entry {
+  margin-bottom:2rem;
+  opacity:0; transform:translateY(8px);
+  transition:opacity .5s, transform .5s;
+}
+.exp-head {
+  display:flex; justify-content:space-between; align-items:baseline;
+  border-bottom:1px solid var(--rule); padding-bottom:.6rem; margin-bottom:1.1rem;
+}
+.exp-role {
+  font-family:'IM Fell English', serif; font-size:1.3rem;
+}
+.exp-period {
+  font-family:'Crimson Pro', serif;
+  font-style:italic; font-size:.9rem; color:var(--ink-dim);
+}
+.exp-org {
+  font-family:'Cormorant SC', serif;
+  font-size:.58rem; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--accent); margin-bottom:1.1rem; opacity:.8;
+}
+.exp-body { font-size:.95rem; line-height:2; color:var(--ink-dim); }
+.exp-body p { margin-bottom:.5rem; text-indent:1.4em; }
+.exp-body p:first-child { text-indent:0; }
+
+/* ── SKILLS — typeset column style ── */
+.skills-type {
+  column-count:3; column-gap:2rem;
+}
+.skill-word {
+  font-family:'Cormorant Garamond', serif;
+  font-size:1.05rem; font-weight:400; color:var(--ink-dim);
+  display:block; break-inside:avoid;
+  padding:.28rem 0; border-bottom:1px solid var(--rule);
+  transition:color .2s, padding-left .2s;
+  cursor:default;
+  opacity:0; transform:translateY(5px);
+  transition:opacity .4s, transform .4s, color .2s, padding-left .2s;
+}
+.skill-word:hover { color:var(--ink); padding-left:.5rem; }
+
+/* ── ACTIVITIES ── */
+.act-entry {
+  margin-bottom:2rem; padding-left:1.5rem;
+  border-left:1px solid var(--rule);
+  opacity:0; transform:translateX(-8px);
+  transition:opacity .5s, transform .5s, border-color .3s;
+}
+.act-entry:hover { border-left-color:var(--accent); }
+.act-title {
+  font-family:'IM Fell English', serif; font-size:1.1rem; margin-bottom:.4rem;
+}
+.act-body { font-size:.92rem; line-height:1.9; color:var(--ink-dim); }
+
+/* ── LANGUAGES ── */
+.lang-display {
+  display:flex; border:1px solid var(--rule);
+}
+.lang-col {
+  flex:1; padding:2rem 2rem;
+  border-right:1px solid var(--rule);
+  transition:background .3s;
+  opacity:0; transform:translateY(8px);
+  transition:opacity .5s, transform .5s, background .3s;
+}
+.lang-col:last-child { border-right:none; }
+.lang-col:hover { background:var(--accent-dim); }
+.lang-name-big {
+  font-family:'IM Fell English', serif;
+  font-size:2.6rem; font-style:italic;
+  color:var(--ink); line-height:1; margin-bottom:.4rem;
+}
+.lang-level {
+  font-family:'Cormorant SC', serif;
+  font-size:.56rem; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--accent); display:block; margin-bottom:1rem;
+}
+.lang-track { height:1px; background:var(--rule); position:relative; }
+.lang-fill {
+  position:absolute; left:0; top:0; height:1px;
+  background:var(--accent); width:0;
+  transition:width 1.4s cubic-bezier(.4,0,.2,1) .2s;
+}
+
+/* ── COLOPHON ── */
+.colophon {
+  padding:2.5rem 0 4.5rem;
+  display:flex; justify-content:space-between; align-items:baseline;
+  border-top:none;
+}
+.colophon-l {
+  font-family:'Cormorant Garamond', serif;
+  font-style:italic; font-size:.88rem; color:var(--ink-dim);
+}
+.colophon-r { display:flex; gap:2rem; }
+.colophon-r a {
+  font-family:'Cormorant SC', serif;
+  font-size:.56rem; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--ink-dim); text-decoration:none; transition:color .2s;
+}
+.colophon-r a:hover { color:var(--accent); }
+
+/* ── KEYFRAMES ── */
+@keyframes up { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
+.revealed { opacity:1 !important; transform:none !important; }
+
+/* ── MOBILE ── */
+@media(max-width:620px){
+  .page{padding:0 1.2rem;}
+  .page::before{display:none;}
+  .lede{grid-template-columns:1fr; gap:1.5rem;}
+  .lede-aside{border-left:none; border-top:1px solid var(--rule); padding:1.2rem 0 0;}
+  .skills-type{column-count:2;}
+  .lang-display{flex-direction:column;}
+  .lang-col{border-right:none; border-bottom:1px solid var(--rule);}
+  .lang-col:last-child{border-bottom:none;}
+  .colophon{flex-direction:column; gap:1rem;}
+  #toggle{top:1rem; right:1rem;}
+  .masthead-meta{justify-content:center; gap:.6rem;}
+  .exp-head{flex-direction:column; gap:.2rem;}
+}
+</style>
+</head>
+<body>
+
+<div id="bar"></div>
+<div id="dot"></div>
+<div id="ring"></div>
+<button id="toggle" aria-label="Toggle theme"><span id="ti">☀</span></button>
+
+<div class="page">
+
+  <header class="masthead">
+    <div class="masthead-top">
+      <span class="folio">Finance · Mississauga, Ontario</span>
+      <span class="folio folio-r">:) </span>
+    </div>
+    <div class="name-block">
+      <span class="name-main">Dakshveer K. Torul</span>
+      <span class="name-sub">Finance Graduate · LLQP Certified · CSC Candidate</span>
+    </div>
+    <div class="masthead-meta">
+      <span>Bilingual EN / FR</span>
+      <span>·</span>
+      <span>LLQP Certified</span>
+      <span>·</span>
+      <span>Sheridan College</span>
+      <span>·</span>
+      <span>CSC in progress</span>
+
+
+
+    </div>
+  </header>
+
+  <div class="lede">
+    <div class="lede-text">
+      <strong>Finance diploma from Sheridan College.</strong> LLQP certified, with CSC Volume I cleared and Volume II in progress. Bilingual in English and French — building toward a career in financial services with sharp analytical instincts and genuine client focus.
+    </div>
+    <aside class="lede-aside">
+      <a class="lede-link" href="tel:6479870510">
+        <span class="ll-label">Phone</span>
+        <span class="ll-val">647-987-0510</span>
+      </a>
+      <a class="lede-link" href="mailto:toruldaksh@gmail.com">
+        <span class="ll-label">Email</span>
+        <span class="ll-val">toruldaksh@gmail.com</span>
+      </a>
+      <a class="lede-link" href="https://www.linkedin.com/in/dakshveer-k-torul-599009281/" target="_blank">
+        <span class="ll-label">LinkedIn</span>
+        <span class="ll-val">dakshveer-k-torul</span>
+      </a>
+    </aside>
+  </div>
+
+  <section id="edu">
+    <div class="sec-label">
+      <span class="sec-num">I</span>
+      <h2 class="sec-title">Education &amp; Certification</h2>
+      <div class="sec-rule"></div>
+    </div>
+    <div class="edu-entry reveal">
+      <div>
+        <div class="edu-title">Diploma in Finance</div>
+        <div class="edu-inst">Sheridan College</div>
+      </div>
+      <div class="edu-right">
+        <span class="edu-status">Completed</span>
+        <span class="edu-year">2024 – 2026</span>
+      </div>
+    </div>
+    <div class="edu-entry reveal">
+      <div>
+        <div class="edu-title">Canadian Securities Course (CSC)</div>
+        <div class="edu-inst">Canadian Securities Institute</div>
+      </div>
+      <div class="edu-right">
+        <span class="edu-status">Vol. I Passed · In Progress</span>
+        <span class="edu-year">2025 – Present</span>
+      </div>
+    </div>
+    <div class="edu-entry reveal">
+      <div>
+        <div class="edu-title">Life License Qualification Program (LLQP)</div>
+        <div class="edu-inst">Industry Certification</div>
+      </div>
+      <div class="edu-right">
+        <span class="edu-status">Certified</span>
+        <span class="edu-year">2024</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="exp">
+    <div class="sec-label">
+      <span class="sec-num">II</span>
+      <h2 class="sec-title">Work Experience</h2>
+      <div class="sec-rule"></div>
+    </div>
+    <div class="exp-entry reveal">
+      <div class="exp-head">
+        <span class="exp-role">Sales Clerk</span>
+        <span class="exp-period">Jan – Dec 2023</span>
+      </div>
+      <div class="exp-org">Welina Cosy Shop · Mauritius</div>
+      <div class="exp-body">
+        <p>Assisted an average of 30 clients daily, providing attentive product guidance and maintaining high service standards throughout each interaction.</p>
+        <p>Handled and fulfilled online orders, coordinating restocking to maintain inventory levels and ensure timely delivery.</p>
+        <p>Conducted daily cash reconciliation against sales invoices, balanced the cash float, and ensured accurate and prompt banking deposits.</p>
+        <p>Maintained a daily transaction ledger with precise, organised financial records.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="sec-label">
+      <span class="sec-num">III</span>
+      <h2 class="sec-title">Skills</h2>
+      <div class="sec-rule"></div>
+    </div>
+    <div class="skills-type">
+      <span class="skill-word reveal-s">Bilingual EN / FR</span>
+      <span class="skill-word reveal-s">Customer Service</span>
+      <span class="skill-word reveal-s">Microsoft Office</span>
+      <span class="skill-word reveal-s">Excel — VLOOKUP</span>
+      <span class="skill-word reveal-s">Pivot Tables</span>
+      <span class="skill-word reveal-s">Data Analysis</span>
+      <span class="skill-word reveal-s">Data Entry</span>
+      <span class="skill-word reveal-s">Attention to Detail</span>
+      <span class="skill-word reveal-s">Teamwork</span>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-label">
+      <span class="sec-num">IV</span>
+      <h2 class="sec-title">Activities</h2>
+      <div class="sec-rule"></div>
+    </div>
+    <div class="act-entry reveal-l">
+      <div class="act-title">Marketing Club — Sheridan College</div>
+      <div class="act-body">Active member participating in events, networking sessions, and campus initiatives that build commercial awareness and professional connections.</div>
+    </div>
+    <div class="act-entry reveal-l">
+      <div class="act-title">Shark Tank Sprint — Business Mixer</div>
+      <div class="act-body">Competed under live conditions, pitching business ideas and receiving real-time feedback from industry professionals.</div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="sec-label">
+      <span class="sec-num">V</span>
+      <h2 class="sec-title">Languages</h2>
+      <div class="sec-rule"></div>
+    </div>
+    <div class="lang-display">
+      <div class="lang-col reveal">
+        <div class="lang-name-big">English</div>
+        <span class="lang-level">Native Fluency</span>
+        <div class="lang-track"><div class="lang-fill" data-w="100%"></div></div>
+      </div>
+      <div class="lang-col reveal">
+        <div class="lang-name-big">Français</div>
+        <span class="lang-level">Full Fluency</span>
+        <div class="lang-track"><div class="lang-fill" data-w="100%"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="colophon">
+    <span class="colophon-l">© 2026 Dakshveer Kushal Torul — Mississauga, Ontario</span>
+    <div class="colophon-r">
+      <a href="tel:6479870510">Phone</a>
+      <a href="mailto:toruldaksh@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/dakshveer-k-torul-599009281/" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// Cursor
+const dot=document.getElementById('dot'), ring=document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX; my=e.clientY;
+  dot.style.left=mx+'px'; dot.style.top=my+'px';
+});
+(function t(){rx+=(mx-rx)*.13;ry+=(my-ry)*.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(t);})();
+document.querySelectorAll('a,button,.edu-entry,.skill-word,.act-entry,.lang-col').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ring.style.width='38px';ring.style.height='38px';ring.style.opacity='.85';});
+  el.addEventListener('mouseleave',()=>{ring.style.width='24px';ring.style.height='24px';ring.style.opacity='.45';});
+});
+
+// Scroll bar
+const bar=document.getElementById('bar');
+window.addEventListener('scroll',()=>{
+  bar.style.width=(window.scrollY/(document.documentElement.scrollHeight-innerHeight)*100)+'%';
+});
+
+// Theme
+const html=document.documentElement, ti=document.getElementById('ti');
+document.getElementById('toggle').addEventListener('click',()=>{
+  const dark=html.dataset.theme==='dark';
+  html.dataset.theme=dark?'light':'dark';
+  ti.textContent=dark?'☽':'☀';
+});
+
+// Reveal
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(!entry.isIntersecting)return;
+    const el=entry.target;
+    const siblings=[...el.parentNode.children].filter(c=>
+      c.classList.contains('reveal')||c.classList.contains('reveal-l')||c.classList.contains('reveal-s')
+    );
+    const i=siblings.indexOf(el);
+    setTimeout(()=>{
+      el.classList.add('revealed');
+      el.querySelectorAll('.lang-fill').forEach(b=>{b.style.width=b.dataset.w;});
+    },i*80);
+    io.unobserve(el);
+  });
+},{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal,.reveal-l,.reveal-s').forEach(el=>io.observe(el));
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}
+  });
+});
+</script>
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Daksh Torul - CV</title>
+    <title>PDF Reader</title>
     <style>
         * {
             margin: 0;
@@ -12,45 +616,15 @@
             height: 100vh;
             width: 100vw;
             overflow: hidden;
-            font-family: system-ui, -apple-system, sans-serif;
-        }
-        .container {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-        .toolbar {
-            padding: 1rem;
-            background: #f5f5f5;
-            border-bottom: 1px solid #ddd;
-            text-align: center;
-        }
-        .toolbar a {
-            display: inline-block;
-            padding: 10px 20px;
-            background: #0077b5;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: 500;
-        }
-        .toolbar a:hover {
-            background: #005582;
         }
         iframe {
             width: 100%;
-            flex: 1;
+            height: 100%;
             border: none;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="toolbar">
-            <a href="cv.pdf" download>📄 Download CV (PDF)</a>
-            <span style="margin-left: 1rem; color: #666;">👆 If PDF doesn't load, download it</span>
-        </div>
-        <iframe src="https://docs.google.com/viewer?url=https:daksh.torul.org/cv.pdf&embedded=true"></iframe>
-    </div>
+    <iframe src="cv.pdf"></iframe>
 </body>
 </html>
